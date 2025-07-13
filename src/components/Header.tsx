@@ -3,9 +3,11 @@ import { Phone, Menu, X, ChevronDown } from 'lucide-react';
 
 interface HeaderProps {
   onServicePageClick?: (servicePage: 'residential-cleaning' | 'commercial-cleaning' | 'move-in-out-cleaning' | 'emergency-cleaning' | 'post-construction-cleaning' | 'luxury-maintenance' | 'short-term-rental-cleaning') => void;
+  onHomeClick?: () => void;
+  onNavigationClick?: (page: 'blog' | 'contact') => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onServicePageClick }) => {
+const Header: React.FC<HeaderProps> = ({ onServicePageClick, onHomeClick, onNavigationClick }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLocationsOpen, setIsLocationsOpen] = useState(false);
@@ -21,9 +23,14 @@ const Header: React.FC<HeaderProps> = ({ onServicePageClick }) => {
   }, []);
 
   const handleLogoClick = () => {
-    // Navigate to home page and scroll to top
-    window.location.href = '/';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Navigate to home page using internal navigation
+    if (onHomeClick) {
+      onHomeClick();
+    } else {
+      // Fallback to external navigation if prop not provided
+      window.location.href = '/';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const locations = [
@@ -63,11 +70,26 @@ const Header: React.FC<HeaderProps> = ({ onServicePageClick }) => {
     setIsMobileMenuOpen(false);
   };
 
+  const handleNavClick = (item: { name: string; href: string; isPage: boolean }) => {
+    if (item.isPage && onNavigationClick) {
+      // Handle page navigation for blog and contact
+      if (item.href === 'blog' || item.href === 'contact') {
+        onNavigationClick(item.href as 'blog' | 'contact');
+      }
+    } else if (!item.isPage) {
+      // Handle scroll to section for non-page links like About
+      const element = document.querySelector(item.href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    setIsMobileMenuOpen(false);
+  };
+
   const navItems = [
-    { name: 'Portfolio', href: '#portfolio' },
-    { name: 'Blog', href: '#blog' },
-    { name: 'About', href: '#about' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Blog', href: 'blog', isPage: true },
+    { name: 'About', href: '#about', isPage: false },
+    { name: 'Contact', href: 'contact', isPage: true },
   ];
 
   // Determine text color based on scroll state
@@ -127,13 +149,13 @@ const Header: React.FC<HeaderProps> = ({ onServicePageClick }) => {
             </div>
 
             {navItems.map((item) => (
-              <a
+              <button
                 key={item.name}
-                href={item.href}
                 className={`font-inter ${textColor} ${hoverColor} transition-colors duration-200`}
+                onClick={() => handleNavClick(item)}
               >
                 {item.name}
-              </a>
+              </button>
             ))}
             
             {/* Locations Dropdown */}
@@ -215,14 +237,13 @@ const Header: React.FC<HeaderProps> = ({ onServicePageClick }) => {
               </div>
 
               {navItems.map((item) => (
-                <a
+                <button
                   key={item.name}
-                  href={item.href}
                   className={`font-inter ${textColor} ${hoverColor} transition-colors duration-200 py-2`}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => handleNavClick(item)}
                 >
                   {item.name}
-                </a>
+                </button>
               ))}
               
               {/* Mobile Locations */}

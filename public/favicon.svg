@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#DAA520;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B8860B;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="30" fill="url(#goldGradient)" stroke="#B8860B" stroke-width="2"/>
+  
+  <!-- Elite "E" stylized -->
+  <g fill="white">
+    <!-- Main E shape -->
+    <rect x="18" y="16" width="4" height="32" rx="1"/>
+    <rect x="18" y="16" width="18" height="4" rx="1"/>
+    <rect x="18" y="30" width="14" height="4" rx="1"/>
+    <rect x="18" y="44" width="18" height="4" rx="1"/>
+    
+    <!-- Luxury accent - small diamond -->
+    <polygon points="44,20 48,24 44,28 40,24" fill="white" opacity="0.9"/>
+    
+    <!-- Small dots for luxury feel -->
+    <circle cx="42" cy="36" r="1.5" fill="white" opacity="0.8"/>
+    <circle cx="46" cy="40" r="1" fill="white" opacity="0.6"/>
+  </g>
+</svg>

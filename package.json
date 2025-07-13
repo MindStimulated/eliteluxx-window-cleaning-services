@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:prod": "tsc --project tsconfig.build.json --noEmit && vite build",
     "build:analyze": "tsc && vite build --mode analyze",
     "lint": "eslint .",
     "preview": "vite preview",

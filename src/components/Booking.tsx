@@ -76,7 +76,12 @@ const Booking: React.FC<BookingProps> = ({ selectedService, onBack, onBookingCom
     'monthly': 'Monthly',
   };
 
-  const [addOnServices, setAddOnServices] = useState([]);
+  const [addOnServices, setAddOnServices] = useState<{
+    id: string;
+    name: string;
+    price: number;
+    icon: React.ElementType;
+  }[]>([]);
 
 // Load addon services from database
 useEffect(() => {

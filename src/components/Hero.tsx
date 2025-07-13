@@ -599,7 +599,7 @@ const Hero: React.FC<HeroProps> = ({ onBookingComplete }) => {
         </div>
       </motion.div>
 
-      <style jsx>{`
+      <style>{`
         .shiny-text {
           position: relative;
           background: linear-gradient(

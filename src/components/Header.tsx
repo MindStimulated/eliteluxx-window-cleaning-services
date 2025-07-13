@@ -90,7 +90,7 @@ const Header: React.FC<HeaderProps> = ({ onServicePageClick }) => {
             className="flex items-center space-x-3 hover:opacity-80 transition-opacity duration-200"
           >
             <img 
-              src="/9A536318-B807-4506-B76F-89306FFBA586.PNG" 
+              src="https://khwmoizeigmddolwtrtl.supabase.co/storage/v1/object/public/eliteluxx-cleaning/images/website/9A536318-B807-4506-B76F-89306FFBA586.PNG" 
               alt="EliteLuxx Cleaning" 
               className="w-10 h-10 md:w-12 md:h-12 object-contain"
             />

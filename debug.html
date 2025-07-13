@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EliteLuxx Debug</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h1>EliteLuxx Loading Test</h1>
+    <div id="results"></div>
+    
+    <script>
+        const results = document.getElementById('results');
+        
+        function addResult(message, isSuccess = true) {
+            const div = document.createElement('div');
+            div.className = `status ${isSuccess ? 'success' : 'error'}`;
+            div.textContent = message;
+            results.appendChild(div);
+        }
+        
+        // Test 1: Check if we can access the main app
+        addResult('✓ HTML loaded successfully');
+        
+        // Test 2: Try to load CSS
+        const cssLink = document.createElement('link');
+        cssLink.rel = 'stylesheet';
+        cssLink.href = '/eliteluxx-cleaning-services/assets/index-Bqr_1l0H.css';
+        cssLink.onload = () => addResult('✓ CSS loaded successfully');
+        cssLink.onerror = () => addResult('✗ CSS failed to load', false);
+        document.head.appendChild(cssLink);
+        
+        // Test 3: Try to load main JS
+        const script = document.createElement('script');
+        script.type = 'module';
+        script.src = '/eliteluxx-cleaning-services/assets/index-BsT3d5NJ.js';
+        script.onload = () => addResult('✓ JavaScript loaded successfully');
+        script.onerror = () => addResult('✗ JavaScript failed to load', false);
+        document.head.appendChild(script);
+        
+        // Test 4: Check console errors
+        window.addEventListener('error', (e) => {
+            addResult(`✗ JavaScript Error: ${e.message}`, false);
+        });
+        
+        // Test 5: Check if React root exists
+        setTimeout(() => {
+            const root = document.getElementById('root');
+            if (root && root.innerHTML.trim() !== '') {
+                addResult('✓ React app mounted successfully');
+            } else {
+                addResult('✗ React app did not mount', false);
+            }
+        }, 3000);
+    </script>
+</body>
+</html>

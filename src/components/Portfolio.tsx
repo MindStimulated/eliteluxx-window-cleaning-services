@@ -70,14 +70,14 @@ const Portfolio: React.FC = () => {
       try {
         await Promise.all(imagePromises);
         setIsLoading(false);
-      } catch (error) {
+      } catch {
         console.warn('Some images failed to preload');
         setIsLoading(false);
       }
     };
 
     preloadImages();
-  }, [currentIndex]); // Re-run when currentIndex changes
+  }, [currentIndex, portfolioItems]); // Re-run when currentIndex changes
 
   // Auto-play functionality with slower timing
   useEffect(() => {

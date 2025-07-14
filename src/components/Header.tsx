@@ -209,92 +209,147 @@ const Header: React.FC<HeaderProps> = ({ onServicePageClick, onHomeClick, onNavi
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-white/30">
-            <nav className="flex flex-col space-y-3 mt-4">
-              {/* Mobile Services */}
-              <div className="py-2">
+          <>
+            {/* Mobile Menu Backdrop */}
+            <div 
+              className="fixed inset-0 bg-black/50 z-40 md:hidden"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            
+            {/* Mobile Menu Panel - 50% width, right-aligned */}
+            <div className="fixed top-0 right-0 h-full w-1/2 bg-white z-50 shadow-2xl md:hidden overflow-y-auto">
+              {/* Mobile Menu Header */}
+              <div className="flex items-center justify-between p-4 border-b border-gray-200">
+                <span className="font-lora font-semibold text-lg text-deep-charcoal">Menu</span>
                 <button
-                  onClick={() => setIsServicesOpen(!isServicesOpen)}
-                  className={`font-inter ${textColor} ${hoverColor} transition-colors duration-200 flex items-center space-x-1`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-deep-charcoal hover:text-champagne-gold transition-colors duration-200"
                 >
-                  <span>Services</span>
-                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isServicesOpen ? 'rotate-180' : ''}`} />
+                  <X className="w-6 h-6" />
                 </button>
-                
-                {isServicesOpen && (
-                  <div className="mt-2 ml-4 space-y-2">
-                    {services.map((service) => (
-                      <button
-                        key={service.key}
-                        onClick={() => handleServiceClick(service.key)}
-                        className={`block text-left font-inter text-sm ${textColor} ${hoverColor} transition-colors duration-200 py-1`}
-                      >
-                        {service.name}
-                      </button>
-                    ))}
-                  </div>
-                )}
               </div>
 
-              {navItems.map((item) => (
+              {/* Mobile Menu Content */}
+              <nav className="flex flex-col p-4 space-y-1">
+                {/* Services Dropdown */}
+                <div>
+                  <button
+                    onClick={() => setIsServicesOpen(!isServicesOpen)}
+                    className="w-full text-left font-inter text-deep-charcoal hover:text-champagne-gold transition-colors duration-200 flex items-center justify-between py-3 border-b border-gray-100"
+                  >
+                    <span>Services</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isServicesOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  
+                  {isServicesOpen && (
+                    <div className="ml-4 mt-2 space-y-2 pb-2">
+                      {services.map((service) => (
+                        <button
+                          key={service.key}
+                          onClick={() => {
+                            handleServiceClick(service.key);
+                            setIsMobileMenuOpen(false);
+                          }}
+                          className="block w-full text-left font-inter text-sm text-deep-charcoal/80 hover:text-champagne-gold transition-colors duration-200 py-2"
+                        >
+                          {service.name}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Locations Dropdown */}
+                <div>
+                  <button
+                    onClick={() => setIsLocationsOpen(!isLocationsOpen)}
+                    className="w-full text-left font-inter text-deep-charcoal hover:text-champagne-gold transition-colors duration-200 flex items-center justify-between py-3 border-b border-gray-100"
+                  >
+                    <span>Locations</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isLocationsOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  
+                  {isLocationsOpen && (
+                    <div className="ml-4 mt-2 space-y-2 pb-2">
+                      {locations.map((location) => (
+                        <button
+                          key={location}
+                          onClick={() => {
+                            handleLocationClick(location);
+                            setIsMobileMenuOpen(false);
+                          }}
+                          className="block w-full text-left font-inter text-sm text-deep-charcoal/80 hover:text-champagne-gold transition-colors duration-200 py-2"
+                        >
+                          {location}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* About */}
                 <button
-                  key={item.name}
-                  className={`font-inter ${textColor} ${hoverColor} transition-colors duration-200 py-2`}
-                  onClick={() => handleNavClick(item)}
+                  onClick={() => {
+                    const aboutItem = navItems.find(item => item.name === 'About');
+                    if (aboutItem) {
+                      handleNavClick(aboutItem);
+                    }
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="w-full text-left font-inter text-deep-charcoal hover:text-champagne-gold transition-colors duration-200 py-3 border-b border-gray-100"
                 >
-                  {item.name}
+                  About
                 </button>
-              ))}
-              
-              {/* Mobile Locations */}
-              <div className="py-2">
+
+                {/* Contact Us */}
                 <button
-                  onClick={() => setIsLocationsOpen(!isLocationsOpen)}
-                  className={`font-inter ${textColor} ${hoverColor} transition-colors duration-200 flex items-center space-x-1`}
+                  onClick={() => {
+                    if (onNavigationClick) {
+                      onNavigationClick('contact');
+                    }
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="w-full text-left font-inter text-deep-charcoal hover:text-champagne-gold transition-colors duration-200 py-3 border-b border-gray-100"
                 >
-                  <span>Locations</span>
-                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isLocationsOpen ? 'rotate-180' : ''}`} />
+                  Contact Us
+                </button>
+
+                {/* Blog */}
+                <button
+                  onClick={() => {
+                    if (onNavigationClick) {
+                      onNavigationClick('blog');
+                    }
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="w-full text-left font-inter text-deep-charcoal hover:text-champagne-gold transition-colors duration-200 py-3 border-b border-gray-100"
+                >
+                  Blog
                 </button>
                 
-                {isLocationsOpen && (
-                  <div className="mt-2 ml-4 space-y-2">
-                    {locations.map((location) => (
-                      <button
-                        key={location}
-                        onClick={() => {
-                          handleLocationClick(location);
-                          setIsMobileMenuOpen(false);
-                        }}
-                        className={`block text-left font-inter text-sm ${textColor} ${hoverColor} transition-colors duration-200 py-1`}
-                      >
-                        {location}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-              
-              <div className="flex flex-col space-y-3 pt-3 border-t border-white/30">
-                <a
-                  href="tel:+1234567890"
-                  className={`flex items-center space-x-2 ${textColor} ${hoverColor} transition-colors duration-200 py-2`}
-                >
-                  <Phone className="w-4 h-4" />
-                  <span className="font-inter font-medium">(123) 456-7890</span>
-                </a>
-                <button className="bg-champagne-gold text-white px-6 py-2 rounded-md font-inter font-medium hover:bg-champagne-gold/90 transition-colors duration-200 text-left">
-                  Book Now
-                </button>
-              </div>
-            </nav>
-          </div>
+                {/* Contact Info & Book Button */}
+                <div className="pt-6 mt-6 border-t border-gray-200 space-y-4">
+                  <a
+                    href="tel:+1234567890"
+                    className="flex items-center space-x-3 text-deep-charcoal hover:text-champagne-gold transition-colors duration-200"
+                  >
+                    <Phone className="w-5 h-5" />
+                    <span className="font-inter font-medium">(123) 456-7890</span>
+                  </a>
+                  <button className="w-full bg-champagne-gold text-white px-6 py-3 rounded-md font-inter font-medium hover:bg-champagne-gold/90 transition-colors duration-200">
+                    Book Now
+                  </button>
+                </div>
+              </nav>
+            </div>
+          </>
         )}
       </div>
       
-      {/* Overlay to close dropdown when clicking outside */}
-      {(isLocationsOpen || isServicesOpen) && (
+      {/* Overlay to close dropdown when clicking outside - Desktop only */}
+      {(isLocationsOpen || isServicesOpen) && !isMobileMenuOpen && (
         <div 
-          className="fixed inset-0 z-40" 
+          className="fixed inset-0 z-40 hidden md:block" 
           onClick={() => {
             setIsLocationsOpen(false);
             setIsServicesOpen(false);

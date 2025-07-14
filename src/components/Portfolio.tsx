@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 
 const Portfolio: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   const portfolioItems = [

@@ -485,21 +485,21 @@ useEffect(() => {
                                 : 'border-sage-green/30 bg-white/90 hover:border-champagne-gold/40'
                             }`}
                           >
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center space-x-3">
-                                <div className="w-8 h-8 bg-champagne-gold/10 rounded-lg flex items-center justify-center">
-                                  <Icon className="w-4 h-4 text-champagne-gold flex-shrink-0" />
+                              <div className="flex justify-between items-center">
+                                <div className="flex items-center space-x-3 flex-1 min-w-0">
+                                  <div className="w-8 h-8 bg-champagne-gold/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <Icon className="w-4 h-4 text-champagne-gold flex-shrink-0" />
+                                  </div>
+                                  <div className={`font-inter font-medium text-xs sm:text-sm truncate ${
+                                    isSelected ? 'text-white' : 'text-deep-charcoal'
+                                  }`}>
+                                    {service.name}
+                                  </div>
                                 </div>
-                                <div className={`font-inter font-medium text-sm ${
-                                  isSelected ? 'text-white' : 'text-deep-charcoal'
-                                }`}>
-                                  {service.name}
+                                <div className="font-inter text-emerald-green text-xs sm:text-sm font-bold bg-emerald-green/10 px-1.5 py-0.5 rounded text-center flex-shrink-0 ml-2">
+                                  {service.price === 0 ? 'Free' : `+$${service.price}`}
                                 </div>
                               </div>
-                              <div className="font-inter text-emerald-green text-sm font-bold bg-emerald-green/10 px-2 py-1 rounded-lg">
-                                {service.price === 0 ? 'Free' : `+$${service.price}`}
-                              </div>
-                            </div>
                           </button>
                         );
                       })}
@@ -595,7 +595,7 @@ useEffect(() => {
                         <div className="border-t-2 border-sage-green/30 pt-4">
                           <div className="flex justify-between items-center">
                             <span className="font-lora font-bold text-lg text-emerald-green">Total</span>
-                            <span className="font-lora font-bold text-4xl text-emerald-green">
+                            <span className="font-lora font-bold text-2xl sm:text-4xl text-emerald-green break-all">
                               ${bookingData.totalPrice.toFixed(2)}
                             </span>
                           </div>

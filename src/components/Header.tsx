@@ -87,9 +87,9 @@ const Header: React.FC<HeaderProps> = ({ onServicePageClick, onHomeClick, onNavi
   };
 
   const navItems = [
-    { name: 'Blog', href: 'blog', isPage: true },
     { name: 'About', href: '#about', isPage: false },
-    { name: 'Contact', href: 'contact', isPage: true },
+    { name: 'Contact Us', href: 'contact', isPage: true },
+    { name: 'Blog', href: 'blog', isPage: true },
   ];
 
   // Determine text color based on scroll state

@@ -3,9 +3,11 @@ import { Sparkles, Phone, Mail, MapPin, Facebook, Instagram, Twitter } from 'luc
 
 interface FooterProps {
   onServicePageClick?: (servicePage: 'residential-cleaning' | 'commercial-cleaning' | 'move-in-out-cleaning' | 'emergency-cleaning' | 'post-construction-cleaning' | 'luxury-maintenance' | 'short-term-rental-cleaning') => void;
+  onNavigationClick?: (page: 'blog' | 'contact') => void;
+  onAboutClick?: () => void;
 }
 
-const Footer: React.FC<FooterProps> = ({ onServicePageClick }) => {
+const Footer: React.FC<FooterProps> = ({ onServicePageClick, onNavigationClick, onAboutClick }) => {
   const currentYear = new Date().getFullYear();
 
   const trustBadges = [
@@ -57,6 +59,38 @@ const Footer: React.FC<FooterProps> = ({ onServicePageClick }) => {
             <p className="font-inter text-white/80 leading-relaxed mb-6">
               Premium luxury cleaning services that exceed expectations. Your space deserves nothing less than perfection.
             </p>
+            
+            {/* Company Links */}
+            <div className="mb-6">
+              <h4 className="font-lora font-medium text-sm mb-3 text-champagne-gold">Company</h4>
+              <ul className="space-y-2">
+                <li>
+                  <button 
+                    onClick={() => onAboutClick && onAboutClick()}
+                    className="font-inter text-white/80 hover:text-champagne-gold transition-colors duration-200 text-left text-sm"
+                  >
+                    About
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    onClick={() => onNavigationClick && onNavigationClick('blog')}
+                    className="font-inter text-white/80 hover:text-champagne-gold transition-colors duration-200 text-left text-sm"
+                  >
+                    Blog
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    onClick={() => onNavigationClick && onNavigationClick('contact')}
+                    className="font-inter text-white/80 hover:text-champagne-gold transition-colors duration-200 text-left text-sm"
+                  >
+                    Contact Us
+                  </button>
+                </li>
+              </ul>
+            </div>
+            
             <div className="flex space-x-4">
               <a href="#" className="text-white/60 hover:text-champagne-gold transition-colors duration-200">
                 <Facebook className="w-5 h-5" />

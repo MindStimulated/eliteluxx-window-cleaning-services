@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, User, ArrowRight, Home, Sparkles, Shield, Heart, Star } from 'lucide-react';
 
@@ -17,9 +17,19 @@ interface BlogPost {
 
 interface BlogProps {
   onPostClick?: (postId: string) => void;
+  onContactClick?: () => void;
 }
 
-const Blog: React.FC<BlogProps> = ({ onPostClick }) => {
+const Blog: React.FC<BlogProps> = ({ onPostClick, onContactClick }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const blogPosts: BlogPost[] = [
     {
       id: 'choosing-local-cleaning-service',
@@ -41,7 +51,7 @@ Check online reviews on Google, Yelp, and other platforms. Pay attention to rece
 Different cleaning companies offer various services. Some focus on regular maintenance cleaning, while others specialize in deep cleaning or specific tasks. Make sure their services align with your needs.
 
 **5. Get Detailed Quotes**
-Request detailed quotes from multiple companies. Compare not just prices, but what's included in each service. Be wary of quotes that seem too good to be true – quality service requires fair compensation.
+Request detailed quotes from multiple companies. Compare not just prices, but what's included in each service. Be wary of quotes that seem to good to be true – quality service requires fair compensation.
 
 **6. Meet the Team**
 If possible, meet the cleaning team before they start. This helps establish trust and allows you to communicate your specific preferences and any areas of concern in your home.
@@ -414,8 +424,8 @@ Remember, the goal isn't perfection – it's maintaining the cleanliness achieve
           {blogPosts.map((post, index) => (
             <motion.article
               key={post.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={isMobile ? {} : { opacity: 0, y: 30 }}
+              whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
               onClick={() => handlePostClick(post.id)}
@@ -496,7 +506,10 @@ Remember, the goal isn't perfection – it's maintaining the cleanliness achieve
           <p className="font-inter text-white/70 mb-6">
             Need personalized cleaning advice for your home?
           </p>
-          <button className="btn-primary font-inter font-medium text-base md:text-lg">
+          <button 
+            onClick={() => onContactClick && onContactClick()}
+            className="btn-primary font-inter font-medium text-base md:text-lg"
+          >
             Contact Our Experts
           </button>
         </motion.div>

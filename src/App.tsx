@@ -101,6 +101,23 @@ function App() {
     setCurrentPage('booking');
   };
 
+  const handleAboutClick = () => {
+    // Scroll to About section on home page
+    const aboutElement = document.querySelector('#about');
+    if (aboutElement) {
+      aboutElement.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // If not on home page, navigate to home first then scroll
+      setCurrentPage('home');
+      setTimeout(() => {
+        const element = document.querySelector('#about');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  };
+
   // Auto-scroll to top when switching pages
   useEffect(() => {
     if (currentPage !== 'home') {
@@ -137,7 +154,7 @@ function App() {
             onContactClick={() => setCurrentPage('home')}
           />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} />
+        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -147,9 +164,9 @@ function App() {
       <div className="min-h-screen">
         <Header onServicePageClick={handleServicePageClick} onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
         <Suspense fallback={<PageLoader />}>
-          <Blog onPostClick={handleBlogPostClick} />
+          <Blog onPostClick={handleBlogPostClick} onContactClick={() => handleNavigationClick('contact')} />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} />
+        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -161,7 +178,7 @@ function App() {
         <div className="pt-20">
           <Contact />
         </div>
-        <Footer onServicePageClick={handleServicePageClick} />
+        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -180,7 +197,7 @@ function App() {
             }}
           />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} />
+        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -198,7 +215,7 @@ function App() {
             }}
           />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} />
+        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -216,7 +233,7 @@ function App() {
             }}
           />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} />
+        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -234,7 +251,7 @@ function App() {
             }}
           />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} />
+        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -252,7 +269,7 @@ function App() {
             }}
           />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} />
+        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -270,7 +287,7 @@ function App() {
             }}
           />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} />
+        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -288,7 +305,7 @@ function App() {
             }}
           />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} />
+        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -300,7 +317,7 @@ function App() {
         <Suspense fallback={<PageLoader />}>
           <TermsOfService onBack={handleBackToHome} />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} />
+        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -312,7 +329,7 @@ function App() {
         <Suspense fallback={<PageLoader />}>
           <PrivacyPolicy onBack={handleBackToHome} />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} />
+        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -328,7 +345,7 @@ function App() {
             onBookingComplete={handleBookingComplete}
           />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} />
+        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -342,7 +359,7 @@ function App() {
           onBack={handleBackToBooking}
           onEditQuote={handleEditQuote}
         />
-        <Footer onServicePageClick={handleServicePageClick} />
+        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -356,7 +373,7 @@ function App() {
           onBack={handleBackToHome}
           onBookingComplete={handleBookingComplete}
         />
-        <Footer onServicePageClick={handleServicePageClick} />
+        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -367,10 +384,9 @@ function App() {
       <Hero onBookingComplete={handleBookingComplete} />
       <Services onServiceClick={handleServiceClick} onServicePageClick={handleServicePageClick} />
       <Portfolio />
-      <Blog onPostClick={handleBlogPostClick} />
       <About />
       <Contact />
-      <Footer onServicePageClick={handleServicePageClick} />
+      <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       <FloatingBookingButton />
     </div>
   );

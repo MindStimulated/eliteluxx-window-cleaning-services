@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Award, Shield, Users, Heart } from 'lucide-react';
 
 const About: React.FC = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   const values = [
     {
       icon: Award,
@@ -86,8 +94,8 @@ const About: React.FC = () => {
           {values.map((value, index) => (
             <motion.div
               key={value.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={isMobile ? {} : { opacity: 0, x: -30 }}
+              whileInView={isMobile ? {} : { opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
               className="text-center card-glass rounded-lg p-6 shadow-3d hover:shadow-3d-hover transition-all duration-300"
@@ -125,8 +133,8 @@ const About: React.FC = () => {
             {team.map((member, index) => (
               <motion.div
                 key={member.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={isMobile ? {} : { opacity: 0, x: 30 }}
+                whileInView={isMobile ? {} : { opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 className="text-center card-glass rounded-lg p-6 shadow-3d hover:shadow-3d-hover transition-all duration-300"
@@ -165,13 +173,11 @@ const About: React.FC = () => {
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={isMobile ? {} : { opacity: 0, x: 30 }}
+                whileInView={isMobile ? {} : { opacity: 1, x: 0 }}
                 transition={{ 
-                  duration: 0.8, 
-                  delay: index * 0.2,
-                  type: "spring",
-                  stiffness: 100
+                  duration: 0.6, 
+                  delay: index * 0.1
                 }}
                 viewport={{ once: true }}
               >

@@ -595,7 +595,7 @@ useEffect(() => {
                         <div className="border-t-2 border-sage-green/30 pt-4">
                           <div className="flex justify-between items-center gap-2">
                             <span className="font-lora font-bold text-lg text-emerald-green flex-shrink-0">Total</span>
-                            <span className="font-lora font-bold text-lg sm:text-2xl md:text-4xl text-emerald-green text-right min-w-0 truncate">
+                            <span className="font-lora font-bold text-base sm:text-lg md:text-xl text-emerald-green text-right min-w-0 truncate">
                               ${bookingData.totalPrice.toFixed(2)}
                             </span>
                           </div>

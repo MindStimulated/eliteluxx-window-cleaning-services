@@ -1,16 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Award, Shield, Users, Heart } from 'lucide-react';
 
 const About: React.FC = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
   const values = [
     {
       icon: Award,
@@ -91,13 +83,9 @@ const About: React.FC = () => {
         {/* Values */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-16 md:mb-20">
           {/* Values Section*/}
-          {values.map((value, index) => (
-            <motion.div
+          {values.map((value) => (
+            <div
               key={value.title}
-              initial={isMobile ? {} : { opacity: 0, x: -30 }}
-              whileInView={isMobile ? {} : { opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
               className="text-center card-glass rounded-lg p-6 shadow-3d hover:shadow-3d-hover transition-all duration-300"
             >
               <div className="bg-champagne-gold/20 rounded-full w-14 h-14 md:w-16 md:h-16 flex items-center justify-center mx-auto mb-4">
@@ -109,7 +97,7 @@ const About: React.FC = () => {
               <p className="font-inter text-sm md:text-base text-white/80 leading-relaxed">
                 {value.description}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
 
@@ -130,13 +118,9 @@ const About: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {team.map((member, index) => (
-              <motion.div
+            {team.map((member) => (
+              <div
                 key={member.name}
-                initial={isMobile ? {} : { opacity: 0, x: 30 }}
-                whileInView={isMobile ? {} : { opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
                 className="text-center card-glass rounded-lg p-6 shadow-3d hover:shadow-3d-hover transition-all duration-300"
               >
                 <div className="relative mb-6">
@@ -156,7 +140,7 @@ const About: React.FC = () => {
                 <p className="font-inter text-white/80 text-xs md:text-sm">
                   {member.bio}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </motion.div>
@@ -171,44 +155,25 @@ const About: React.FC = () => {
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
             {stats.map((stat, index) => (
-              <motion.div
+              <div
                 key={stat.label}
-                initial={isMobile ? {} : { opacity: 0, x: 30 }}
-                whileInView={isMobile ? {} : { opacity: 1, x: 0 }}
-                transition={{ 
-                  duration: 0.6, 
-                  delay: index * 0.1
-                }}
-                viewport={{ once: true }}
               >
-                <motion.div 
+                <div 
                   className="font-lora font-semibold text-2xl md:text-3xl lg:text-4xl text-champagne-gold mb-2"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 1, delay: index * 0.2 + 0.5 }}
-                  viewport={{ once: true }}
                 >
-                  <motion.span
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ 
-                      duration: 2, 
-                      delay: index * 0.2 + 0.8,
-                    }}
-                    viewport={{ once: true }}
-                  >
+                  <span>
                     <CountUpNumber 
                       end={stat.number} 
                       duration={2000} 
                       delay={index * 200 + 800}
                     />
                     {stat.suffix}
-                  </motion.span>
-                </motion.div>
+                  </span>
+                </div>
                 <div className="font-inter text-sm md:text-base text-white/80">
                   {stat.label}
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </motion.div>

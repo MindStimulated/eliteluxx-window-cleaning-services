@@ -113,8 +113,8 @@ const Services: React.FC<ServicesProps> = ({ onServiceClick, onServicePageClick 
     <section className="py-16 md:py-20 bg-black/20 " id="services">
       <div className="max-w-site mx-auto px-4 sm:px-6">
         <motion.div
-          initial={isMobile ? {} : { opacity: 0, y: 30 }}
-          whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
+          initial={isMobile ? { opacity: 1 } : { opacity: 0, y: 30 }}
+          whileInView={isMobile ? { opacity: 1 } : { opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
           className="text-center mb-12 md:mb-16"
@@ -129,13 +129,9 @@ const Services: React.FC<ServicesProps> = ({ onServiceClick, onServicePageClick 
         </motion.div>
         {/*Service Grid*/}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {services.map((service, index) => (
-            <motion.div
+          {services.map((service) => (
+            <div
               key={service.title}
-              initial={isMobile ? {} : { opacity: 0, y: 30 }}
-              whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
               onClick={() => handleServiceClick(service.title)}
               className="card-glass rounded-lg overflow-hidden shadow-3d hover:shadow-3d-hover transition-all duration-300 group cursor-pointer"
             >
@@ -190,13 +186,13 @@ const Services: React.FC<ServicesProps> = ({ onServiceClick, onServicePageClick 
                   </button>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         <motion.div
-          initial={isMobile ? {} : { opacity: 0, y: 30 }}
-          whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
+          initial={isMobile ? { opacity: 1 } : { opacity: 0, y: 30 }}
+          whileInView={isMobile ? { opacity: 1 } : { opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
           className="text-center mt-8 md:mt-12"

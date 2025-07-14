@@ -20,13 +20,23 @@ body {
   font-family: 'Inter', sans-serif;
   line-height: 1.6;
   color: #2E2E2E;
-  /* Optimized background loading */
+  /* Optimized background loading with mobile fix */
   background-image: url('https://khwmoizeigmddolwtrtl.supabase.co/storage/v1/object/public/eliteluxx-cleaning/images/website/black-golf-marble-texture-background.jpg');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-repeat: no-repeat;
+  /* Fix for mobile - use scroll instead of fixed */
+  background-attachment: scroll;
   /* Add will-change for better performance */
   will-change: auto;
+}
+
+/* Mobile-specific background fix */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+    background-size: cover;
+  }
 }
 /* Header glass effect - same as scrolled header */
 .header-glass {

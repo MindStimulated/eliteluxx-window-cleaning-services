@@ -573,9 +573,9 @@ useEffect(() => {
                                 const addOn = addOnServices.find(service => service.id === addOnId);
                                 if (!addOn) return null;
                                 return (
-                                  <div key={addOnId} className="flex justify-between items-center ml-2">
-                                    <span className="font-inter text-deep-charcoal/60 text-xs">{addOn.name}</span>
-                                    <span className="font-inter text-emerald-green text-xs">
+                                  <div key={addOnId} className="flex justify-between items-center ml-2 gap-2">
+                                    <span className="font-inter text-deep-charcoal/60 text-xs flex-1 min-w-0 truncate">{addOn.name}</span>
+                                    <span className="font-inter text-emerald-green text-xs flex-shrink-0">
                                       {addOn.price === 0 ? 'Free' : `+$${addOn.price}`}
                                     </span>
                                   </div>
@@ -593,9 +593,9 @@ useEffect(() => {
                         )}
                         
                         <div className="border-t-2 border-sage-green/30 pt-4">
-                          <div className="flex justify-between items-center">
-                            <span className="font-lora font-bold text-lg text-emerald-green">Total</span>
-                            <span className="font-lora font-bold text-2xl sm:text-4xl text-emerald-green break-all">
+                          <div className="flex justify-between items-center gap-2">
+                            <span className="font-lora font-bold text-lg text-emerald-green flex-shrink-0">Total</span>
+                            <span className="font-lora font-bold text-lg sm:text-2xl md:text-4xl text-emerald-green text-right min-w-0 truncate">
                               ${bookingData.totalPrice.toFixed(2)}
                             </span>
                           </div>

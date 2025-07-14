@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Home, Building2, Sparkles, Shield, Clock, Star } from 'lucide-react';
 
@@ -8,6 +8,14 @@ interface ServicesProps {
 }
 
 const Services: React.FC<ServicesProps> = ({ onServiceClick, onServicePageClick }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   const services = [
     {
       icon: Home,
@@ -105,8 +113,8 @@ const Services: React.FC<ServicesProps> = ({ onServiceClick, onServicePageClick 
     <section className="py-16 md:py-20 bg-black/20 " id="services">
       <div className="max-w-site mx-auto px-4 sm:px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={isMobile ? {} : { opacity: 0, y: 30 }}
+          whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
           className="text-center mb-12 md:mb-16"
@@ -124,8 +132,8 @@ const Services: React.FC<ServicesProps> = ({ onServiceClick, onServicePageClick 
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={isMobile ? {} : { opacity: 0, y: 30 }}
+              whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
               onClick={() => handleServiceClick(service.title)}
@@ -187,8 +195,8 @@ const Services: React.FC<ServicesProps> = ({ onServiceClick, onServicePageClick 
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={isMobile ? {} : { opacity: 0, y: 30 }}
+          whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
           className="text-center mt-8 md:mt-12"

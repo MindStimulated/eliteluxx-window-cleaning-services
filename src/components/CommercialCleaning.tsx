@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Building2, CheckCircle, Clock, Star, Users, Shield, ArrowLeft, Briefcase } from 'lucide-react';
+import { Building2, CheckCircle, Star, Users, Shield, ArrowLeft, Briefcase } from 'lucide-react';
 
 interface CommercialCleaningProps {
   onBack?: () => void;
@@ -8,6 +8,14 @@ interface CommercialCleaningProps {
 }
 
 const CommercialCleaning: React.FC<CommercialCleaningProps> = ({ onBack, onBookingClick }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   const services = [
     'Office spaces & cubicles',
     'Reception & waiting areas',
@@ -134,17 +142,22 @@ const CommercialCleaning: React.FC<CommercialCleaningProps> = ({ onBack, onBooki
             Commercial Cleaning Services
           </h1>
           <p className="font-inter text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
-            Create a professional, healthy work environment with our comprehensive commercial cleaning services. 
-            From small offices to large corporate facilities, we maintain the highest standards of cleanliness and professionalism.
+            <span className={isMobile ? 'block' : 'hidden'}>
+              Professional commercial cleaning for healthy work environments.
+            </span>
+            <span className={isMobile ? 'hidden' : 'block'}>
+              Create a professional, healthy work environment with our comprehensive commercial cleaning services. 
+              From small offices to large corporate facilities, we maintain the highest standards of cleanliness and professionalism.
+            </span>
           </p>
         </motion.div>
 
-        {/* Industries We Serve */}
+        {/* Industries We Serve - Hidden on mobile to reduce content above packages */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={isMobile ? {} : { opacity: 0, y: 30 }}
+          animate={isMobile ? {} : { opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-16"
+          className={`mb-16 ${isMobile ? 'hidden' : 'block'}`}
         >
           <h2 className="font-lora font-semibold text-2xl md:text-3xl text-champagne-gold text-center mb-12">
             Industries We Serve
@@ -166,12 +179,12 @@ const CommercialCleaning: React.FC<CommercialCleaningProps> = ({ onBack, onBooki
           </div>
         </motion.div>
 
-        {/* Services Included */}
+        {/* Services Included - Hidden on mobile to reduce content above packages */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={isMobile ? {} : { opacity: 0, y: 30 }}
+          animate={isMobile ? {} : { opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mb-16"
+          className={`mb-16 ${isMobile ? 'hidden' : 'block'}`}
         >
           <h2 className="font-lora font-semibold text-2xl md:text-3xl text-champagne-gold text-center mb-12">
             Comprehensive Office Cleaning

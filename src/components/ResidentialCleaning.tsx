@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Home, CheckCircle, Clock, Star, Users, Shield, ArrowLeft } from 'lucide-react';
 
@@ -8,6 +8,14 @@ interface ResidentialCleaningProps {
 }
 
 const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBookingClick }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   const features = [
     'Deep kitchen cleaning & sanitization',
     'Bathroom deep clean & disinfection',
@@ -103,8 +111,8 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
 
         {/* Hero Section */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={isMobile ? {} : { opacity: 0, y: 30 }}
+          animate={isMobile ? {} : { opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -117,17 +125,22 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
             Residential Cleaning Services
           </h1>
           <p className="font-inter text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
-            Transform your home into a pristine sanctuary with our comprehensive residential cleaning services. 
-            From regular maintenance to deep cleaning, we handle every detail so you can enjoy more time with what matters most.
+            <span className={isMobile ? 'block' : 'hidden'}>
+              Professional home cleaning services tailored to your lifestyle.
+            </span>
+            <span className={isMobile ? 'hidden' : 'block'}>
+              Transform your home into a pristine sanctuary with our comprehensive residential cleaning services. 
+              From regular maintenance to deep cleaning, we handle every detail so you can enjoy more time with what matters most.
+            </span>
           </p>
         </motion.div>
 
-        {/* Features Grid */}
+        {/* Features Grid - Hidden on mobile to reduce content above packages */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={isMobile ? {} : { opacity: 0, y: 30 }}
+          animate={isMobile ? {} : { opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-16"
+          className={`mb-16 ${isMobile ? 'hidden' : 'block'}`}
         >
           <h2 className="font-lora font-semibold text-2xl md:text-3xl text-champagne-gold text-center mb-12">
             What's Included
@@ -136,8 +149,8 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
             {features.map((feature, index) => (
               <motion.div
                 key={feature}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={isMobile ? {} : { opacity: 0, y: 20 }}
+                animate={isMobile ? {} : { opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
                 className="card-glass rounded-lg p-6 text-center"
               >
@@ -150,8 +163,8 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
 
         {/* Service Packages */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={isMobile ? {} : { opacity: 0, y: 30 }}
+          animate={isMobile ? {} : { opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mb-16"
         >
@@ -162,8 +175,8 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
             {packages.map((pkg, index) => (
               <motion.div
                 key={pkg.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={isMobile ? {} : { opacity: 0, y: 20 }}
+                animate={isMobile ? {} : { opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
                 className="card-glass rounded-lg p-8 relative overflow-hidden group hover:shadow-3d-hover transition-all duration-300"
               >
@@ -202,12 +215,12 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
           </div>
         </motion.div>
 
-        {/* Our Process */}
+        {/* Our Process - Hidden on mobile to reduce content above packages */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={isMobile ? {} : { opacity: 0, y: 30 }}
+          animate={isMobile ? {} : { opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="mb-16"
+          className={`mb-16 ${isMobile ? 'hidden' : 'block'}`}
         >
           <h2 className="font-lora font-semibold text-2xl md:text-3xl text-champagne-gold text-center mb-12">
             Our Process
@@ -216,8 +229,8 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
             {process.map((step, index) => (
               <motion.div
                 key={step.step}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={isMobile ? {} : { opacity: 0, y: 20 }}
+                animate={isMobile ? {} : { opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
                 className="text-center"
               >
@@ -233,8 +246,8 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
 
         {/* Why Choose Us */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={isMobile ? {} : { opacity: 0, y: 30 }}
+          animate={isMobile ? {} : { opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
           className="mb-16"
         >
@@ -270,8 +283,8 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
 
         {/* CTA Section */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={isMobile ? {} : { opacity: 0, y: 30 }}
+          animate={isMobile ? {} : { opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.0 }}
           className="text-center"
         >

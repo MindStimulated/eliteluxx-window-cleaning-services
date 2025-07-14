@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Move, CheckCircle, Clock, Star, Home, Shield, ArrowLeft, Package } from 'lucide-react';
+import { Sun, CheckCircle, Star, ArrowLeft, Battery } from 'lucide-react';
 
 interface MoveInOutCleaningProps {
   onBack?: () => void;
@@ -9,45 +9,45 @@ interface MoveInOutCleaningProps {
 
 const MoveInOutCleaning: React.FC<MoveInOutCleaningProps> = ({ onBack, onBookingClick }) => {
   const services = [
-    'Deep clean all rooms from top to bottom',
-    'Inside & outside of all appliances',
-    'Cabinet interiors & exteriors',
-    'Closet cleaning & sanitization',
-    'Bathroom deep scrub & disinfection',
-    'Window cleaning (interior)',
-    'Baseboard & trim detailed cleaning',
-    'Light fixture cleaning & dusting'
+    'Panel surface cleaning & decontamination',
+    'Inverter & mounting system cleaning',
+    'Performance optimization checks',
+    'Gentle cleaning methods to prevent damage',
+    'Efficiency monitoring & reporting',
+    'Regular maintenance scheduling',
+    'Bird deterrent installation',
+    'Weather damage assessment'
   ];
 
-  const moveTypes = [
+  const serviceTypes = [
     {
-      title: 'Move-In Cleaning',
-      description: 'Prepare your new home for move-in with our comprehensive deep cleaning service.',
+      title: 'Residential Solar Cleaning',
+      description: 'Maximize your home solar system efficiency with professional cleaning services.',
       features: [
-        'Sanitize all surfaces',
-        'Deep clean appliances',
-        'Remove previous tenant residue',
-        'Ensure move-in ready condition'
+        'Increase energy output',
+        'Extend panel lifespan',
+        'Monthly maintenance plans',
+        'Performance reports included'
       ],
-      icon: Home
+      icon: Sun
     },
     {
-      title: 'Move-Out Cleaning',
-      description: 'Get your security deposit back with our thorough move-out cleaning service.',
+      title: 'Commercial Solar Cleaning',
+      description: 'Large-scale solar installations require specialized cleaning and maintenance.',
       features: [
-        'Meet landlord requirements',
-        'Deep clean all areas',
-        'Remove all traces of occupancy',
-        'Property inspection ready'
+        'Fleet management systems',
+        'Detailed efficiency reports',
+        'Safety compliance protocols',
+        'Scheduled maintenance programs'
       ],
-      icon: Package
+      icon: Battery
     }
   ];
 
   const packages = [
     {
-      name: 'Standard Move',
-      price: 'From $250',
+      name: 'Basic Solar Clean',
+      price: 'From $150',
       duration: '4-6 hours',
       ideal: 'Apartments & small homes',
       includes: [
@@ -133,15 +133,15 @@ const MoveInOutCleaning: React.FC<MoveInOutCleaningProps> = ({ onBack, onBooking
         >
           <div className="flex justify-center mb-6">
             <div className="w-16 h-16 bg-champagne-gold/10 rounded-full flex items-center justify-center">
-              <Move className="w-8 h-8 text-champagne-gold" />
+              <Sun className="w-8 h-8 text-champagne-gold" />
             </div>
           </div>
           <h1 className="font-lora font-semibold text-3xl md:text-4xl lg:text-5xl text-champagne-gold mb-6">
-            Move-In / Move-Out Cleaning
+            Solar Panel Cleaning Services
           </h1>
           <p className="font-inter text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
-            Make your transition seamless with our comprehensive move-in and move-out cleaning services. 
-            Whether you're starting fresh in a new home or ensuring you get your deposit back, we handle every detail.
+            Maximize your solar panel efficiency with our specialized cleaning services. 
+            Regular maintenance ensures optimal energy production and extends the life of your solar investment.
           </p>
         </motion.div>
 
@@ -153,10 +153,10 @@ const MoveInOutCleaning: React.FC<MoveInOutCleaningProps> = ({ onBack, onBooking
           className="mb-16"
         >
           <h2 className="font-lora font-semibold text-2xl md:text-3xl text-champagne-gold text-center mb-12">
-            Complete Moving Solutions
+            Solar Cleaning Solutions
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {moveTypes.map((type, index) => (
+            {serviceTypes.map((type, index) => (
               <motion.div
                 key={type.title}
                 initial={{ opacity: 0, x: index === 0 ? -20 : 20 }}

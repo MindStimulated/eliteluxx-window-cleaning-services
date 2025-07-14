@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Home, CheckCircle, Clock, Star, Users, Shield, ArrowLeft } from 'lucide-react';
 
-interface ResidentialCleaningProps {
+interface ResidentialWindowsProps {
   onBack?: () => void;
   onBookingClick?: () => void;
 }
 
-const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBookingClick }) => {
+const ResidentialWindows: React.FC<ResidentialWindowsProps> = ({ onBack, onBookingClick }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -16,6 +16,7 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+  
   const features = [
     'Interior & exterior window cleaning',
     'Screen cleaning & maintenance',
@@ -74,18 +75,18 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
   const process = [
     {
       step: '1',
-      title: 'Property Assessment',
+      title: 'Window Assessment',
       description: 'We evaluate your windows and discuss your specific cleaning needs and schedule preferences.'
     },
     {
       step: '2',
       title: 'Equipment Setup',
-      description: 'We arrive with professional-grade equipment and eco-friendly cleaning solutions.'
+      description: 'We arrive with professional-grade window cleaning equipment and eco-friendly solutions.'
     },
     {
       step: '3',
       title: 'Window Cleaning',
-      description: 'Our certified technicians clean your windows inside and out using proven techniques.'
+      description: 'Our certified window technicians clean your windows inside and out using proven techniques.'
     },
     {
       step: '4',
@@ -169,7 +170,7 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
           className="mb-16"
         >
           <h2 className="font-lora font-semibold text-2xl md:text-3xl text-champagne-gold text-center mb-12">
-            Service Packages
+            Window Cleaning Packages
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {packages.map((pkg, index) => (
@@ -223,7 +224,7 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
           className={`mb-16 ${isMobile ? 'hidden' : 'block'}`}
         >
           <h2 className="font-lora font-semibold text-2xl md:text-3xl text-champagne-gold text-center mb-12">
-            Our Process
+            Our Window Cleaning Process
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {process.map((step, index) => (
@@ -253,28 +254,28 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
         >
           <div className="card-glass rounded-lg p-8 md:p-12">
             <h2 className="font-lora font-semibold text-2xl md:text-3xl text-champagne-gold text-center mb-8">
-              Why Choose EliteLuxx for Your Home?
+              Why Choose EliteLuxx for Your Windows?
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
                 <Users className="w-12 h-12 text-champagne-gold mx-auto mb-4" />
-                <h3 className="font-lora font-medium text-lg text-champagne-gold mb-3">Trusted Professionals</h3>
+                <h3 className="font-lora font-medium text-lg text-champagne-gold mb-3">Certified Window Technicians</h3>
                 <p className="font-inter text-white/90 text-sm leading-relaxed">
-                  All our cleaners are background-checked, insured, and trained to our exacting standards.
+                  All our window cleaning technicians are certified, insured, and trained to industry standards.
                 </p>
               </div>
               <div className="text-center">
                 <Shield className="w-12 h-12 text-champagne-gold mx-auto mb-4" />
-                <h3 className="font-lora font-medium text-lg text-champagne-gold mb-3">100% Satisfaction</h3>
+                <h3 className="font-lora font-medium text-lg text-champagne-gold mb-3">Streak-Free Guarantee</h3>
                 <p className="font-inter text-white/90 text-sm leading-relaxed">
-                  We guarantee our work. If you're not completely satisfied, we'll make it right.
+                  We guarantee crystal-clear, streak-free windows. If you're not satisfied, we'll return at no charge.
                 </p>
               </div>
               <div className="text-center">
                 <Clock className="w-12 h-12 text-champagne-gold mx-auto mb-4" />
                 <h3 className="font-lora font-medium text-lg text-champagne-gold mb-3">Flexible Scheduling</h3>
                 <p className="font-inter text-white/90 text-sm leading-relaxed">
-                  Weekly, bi-weekly, monthly, or one-time cleaning - we work around your schedule.
+                  Weekly, monthly, quarterly, or one-time service - we work around your schedule.
                 </p>
               </div>
             </div>
@@ -302,7 +303,7 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
                 onClick={onBookingClick}
                 className="btn-primary font-inter font-medium text-lg px-8 py-4"
               >
-                Book Now
+                Book Window Cleaning
               </button>
               <button className="border-2 border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-white px-8 py-4 rounded-md font-inter font-medium text-lg transition-all duration-200">
                 Get Free Quote
@@ -315,4 +316,4 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
   );
 };
 
-export default ResidentialCleaning;
+export default ResidentialWindows;

@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/eliteluxx-cleaning-services/', // GitHub Pages base path
+  base: '/eliteluxx-window-cleaning/', // Base path
   server: {
     port: 5173,
     host: true
@@ -21,13 +21,13 @@ export default defineConfig({
           supabase: ['@supabase/supabase-js'],
           // Group service pages for better caching
           services: [
-            './src/components/ResidentialCleaning',
-            './src/components/CommercialCleaning',
-            './src/components/MoveInOutCleaning',
-            './src/components/EmergencyCleaning'
+            './src/components/ResidentialWindows',
+            './src/components/CommercialWindows',
+            './src/components/SolarPanelCleaning',
+            './src/components/PressureWashing'
           ],
           'services-extended': [
-            './src/components/PostConstructionCleaning',
+            './src/components/ScreenRepair',
             './src/components/LuxuryMaintenance',
             './src/components/ShortTermRentalCleaning'
           ],

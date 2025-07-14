@@ -7,19 +7,18 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import FloatingBookingButton from './components/FloatingBookingButton';
-import Booking from './components/Booking';
-import BookingCheckout from './components/BookingCheckout';
 
 // Lazy load service pages for better performance
-const ResidentialCleaning = lazy(() => import('./components/ResidentialCleaning'));
-const CommercialCleaning = lazy(() => import('./components/CommercialCleaning'));
-const MoveInOutCleaning = lazy(() => import('./components/MoveInOutCleaning'));
-const EmergencyCleaning = lazy(() => import('./components/EmergencyCleaning'));
-const PostConstructionCleaning = lazy(() => import('./components/PostConstructionCleaning'));
-const LuxuryMaintenance = lazy(() => import('./components/LuxuryMaintenance'));
-const ShortTermRentalCleaning = lazy(() => import('./components/ShortTermRentalCleaning'));
+const ResidentialWindows = lazy(() => import('./components/ResidentialWindows'));
+const CommercialWindows = lazy(() => import('./components/CommercialWindows'));
+const SolarPanelCleaning = lazy(() => import('./components/SolarPanelCleaning'));
+const PressureWashing = lazy(() => import('./components/PressureWashing'));
+const ScreenRepair = lazy(() => import('./components/ScreenRepair'));
+const HighRiseWindows = lazy(() => import('./components/HighRiseWindows'));
+const EmergencyService = lazy(() => import('./components/EmergencyWindowService'));
 
 // Lazy load less frequently used pages
+const ServicesPage = lazy(() => import('./components/ServicesPage'));
 const TermsOfService = lazy(() => import('./components/TermsOfService'));
 const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
 const LocationQuote = lazy(() => import('./components/LocationQuote'));
@@ -37,10 +36,9 @@ const PageLoader = () => (
 );
 
 interface BookingData {
-  bedrooms: number;
-  bathrooms: number;
-  halfBaths: number;
-  sqFt: number;
+  propertyType: 'residential' | 'commercial';
+  windowCount: number;
+  stories: number;
   frequency: 'one-time' | 'weekly' | 'bi-weekly' | 'monthly';
   addOns: string[];
   serviceType: string;
@@ -48,19 +46,14 @@ interface BookingData {
 }
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'booking' | 'checkout' | 'terms' | 'privacy' | 'location' | 'blog' | 'blog-post' | 'contact' | 'residential-cleaning' | 'commercial-cleaning' | 'move-in-out-cleaning' | 'emergency-cleaning' | 'post-construction-cleaning' | 'luxury-maintenance' | 'short-term-rental-cleaning'>('home');
-  const [selectedService, setSelectedService] = useState<string>('');
+  const [currentPage, setCurrentPage] = useState<'home' | 'services' | 'booking' | 'checkout' | 'terms' | 'privacy' | 'location' | 'blog' | 'blog-post' | 'contact' | 'residential-windows' | 'commercial-windows' | 'solar-panel-cleaning' | 'pressure-washing' | 'screen-repair' | 'high-rise-windows' | 'emergency-service'>('home');
   const [bookingData, setBookingData] = useState<BookingData | null>(null);
   const [selectedLocation, setSelectedLocation] = useState<string>('');
   const [selectedBlogPost, setSelectedBlogPost] = useState<string>('');
 
   const handleServiceClick = (serviceName: string) => {
-    setSelectedService(serviceName);
-    setCurrentPage('booking');
-  };
-
-  const handleServicePageClick = (servicePage: 'residential-cleaning' | 'commercial-cleaning' | 'move-in-out-cleaning' | 'emergency-cleaning' | 'post-construction-cleaning' | 'luxury-maintenance' | 'short-term-rental-cleaning') => {
-    setCurrentPage(servicePage);
+    // For now, just scroll to services section or handle as needed
+    console.log('Service clicked:', serviceName);
   };
 
   const handleBlogPostClick = (postId: string) => {
@@ -73,32 +66,18 @@ function App() {
     setSelectedBlogPost('');
   };
 
-  const handleNavigationClick = (page: 'blog' | 'contact') => {
+  const handleNavigationClick = (page: 'blog' | 'contact' | 'services') => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleBackToHome = () => {
     setCurrentPage('home');
-    setSelectedService('');
     setBookingData(null);
     setSelectedLocation('');
     setSelectedBlogPost('');
     // Scroll to top when returning to home
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleBookingComplete = (data: BookingData) => {
-    setBookingData(data);
-    setCurrentPage('checkout');
-  };
-
-  const handleBackToBooking = () => {
-    setCurrentPage('booking');
-  };
-
-  const handleEditQuote = () => {
-    setCurrentPage('booking');
   };
 
   const handleAboutClick = () => {
@@ -143,10 +122,27 @@ function App() {
     }
   }, []);
 
+  if (currentPage === 'services') {
+    return (
+      <div className="min-h-screen">
+        <Header onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
+        <Suspense fallback={<PageLoader />}>
+          <ServicesPage 
+            onBack={handleBackToHome}
+            onBookingClick={() => {
+              setCurrentPage('home');
+            }}
+          />
+        </Suspense>
+        <Footer onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
+      </div>
+    );
+  }
+
   if (currentPage === 'blog-post' && selectedBlogPost) {
     return (
       <div className="min-h-screen">
-        <Header onServicePageClick={handleServicePageClick} onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
+        <Header onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
         <Suspense fallback={<PageLoader />}>
           <BlogPostDetail 
             postId={selectedBlogPost}
@@ -154,7 +150,7 @@ function App() {
             onContactClick={() => setCurrentPage('home')}
           />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
+        <Footer onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -162,11 +158,11 @@ function App() {
   if (currentPage === 'blog') {
     return (
       <div className="min-h-screen">
-        <Header onServicePageClick={handleServicePageClick} onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
+        <Header onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
         <Suspense fallback={<PageLoader />}>
           <Blog onPostClick={handleBlogPostClick} onContactClick={() => handleNavigationClick('contact')} />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
+        <Footer onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -174,138 +170,131 @@ function App() {
   if (currentPage === 'contact') {
     return (
       <div className="min-h-screen">
-        <Header onServicePageClick={handleServicePageClick} onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
+        <Header onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
         <div className="pt-20">
           <Contact />
         </div>
-        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
+        <Footer onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
 
   // Service Pages
-  if (currentPage === 'residential-cleaning') {
+  if (currentPage === 'residential-windows') {
     return (
       <div className="min-h-screen">
-        <Header onServicePageClick={handleServicePageClick} onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
+        <Header onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
         <Suspense fallback={<PageLoader />}>
-          <ResidentialCleaning 
+          <ResidentialWindows 
             onBack={handleBackToHome}
             onBookingClick={() => {
-              setSelectedService('Residential Cleaning');
-              setCurrentPage('booking');
+              setCurrentPage('home');
             }}
           />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
+        <Footer onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
 
-  if (currentPage === 'commercial-cleaning') {
+  if (currentPage === 'commercial-windows') {
     return (
       <div className="min-h-screen">
-        <Header onServicePageClick={handleServicePageClick} onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
+        <Header onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
         <Suspense fallback={<PageLoader />}>
-          <CommercialCleaning 
+          <CommercialWindows 
             onBack={handleBackToHome}
             onBookingClick={() => {
-              setSelectedService('Commercial Cleaning');
-              setCurrentPage('booking');
+              setCurrentPage('home');
             }}
           />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
+        <Footer onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
 
-  if (currentPage === 'move-in-out-cleaning') {
+  if (currentPage === 'solar-panel-cleaning') {
     return (
       <div className="min-h-screen">
-        <Header onServicePageClick={handleServicePageClick} onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
+        <Header onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
         <Suspense fallback={<PageLoader />}>
-          <MoveInOutCleaning 
+          <SolarPanelCleaning 
             onBack={handleBackToHome}
             onBookingClick={() => {
-              setSelectedService('Move-in/Move-out Cleaning');
-              setCurrentPage('booking');
+              setCurrentPage('home');
             }}
           />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
+        <Footer onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
 
-  if (currentPage === 'emergency-cleaning') {
+  if (currentPage === 'pressure-washing') {
     return (
       <div className="min-h-screen">
-        <Header onServicePageClick={handleServicePageClick} onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
+        <Header onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
         <Suspense fallback={<PageLoader />}>
-          <EmergencyCleaning 
+          <PressureWashing 
             onBack={handleBackToHome}
             onBookingClick={() => {
-              setSelectedService('Emergency Cleaning');
-              setCurrentPage('booking');
+              setCurrentPage('home');
             }}
           />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
+        <Footer onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
 
-  if (currentPage === 'post-construction-cleaning') {
+  if (currentPage === 'screen-repair') {
     return (
       <div className="min-h-screen">
-        <Header onServicePageClick={handleServicePageClick} onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
+        <Header onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
         <Suspense fallback={<PageLoader />}>
-          <PostConstructionCleaning 
+          <ScreenRepair 
             onBack={handleBackToHome}
             onBookingClick={() => {
-              setSelectedService('Post-Construction Cleaning');
-              setCurrentPage('booking');
+              setCurrentPage('home');
             }}
           />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
+        <Footer onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
 
-  if (currentPage === 'luxury-maintenance') {
+  if (currentPage === 'high-rise-windows') {
     return (
       <div className="min-h-screen">
-        <Header onServicePageClick={handleServicePageClick} onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
+        <Header onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
         <Suspense fallback={<PageLoader />}>
-          <LuxuryMaintenance 
+          <HighRiseWindows 
             onBack={handleBackToHome}
             onBookingClick={() => {
-              setSelectedService('Luxury Maintenance');
-              setCurrentPage('booking');
+              setCurrentPage('home');
             }}
           />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
+        <Footer onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
 
-  if (currentPage === 'short-term-rental-cleaning') {
+  if (currentPage === 'emergency-service') {
     return (
       <div className="min-h-screen">
-        <Header onServicePageClick={handleServicePageClick} onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
+        <Header onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
         <Suspense fallback={<PageLoader />}>
-          <ShortTermRentalCleaning 
+          <EmergencyService 
             onBack={handleBackToHome}
             onBookingClick={() => {
-              setSelectedService('Short Term Rental Cleaning');
-              setCurrentPage('booking');
+              setCurrentPage('home');
             }}
           />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
+        <Footer onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -313,11 +302,11 @@ function App() {
   if (currentPage === 'terms') {
     return (
       <div className="min-h-screen">
-        <Header onServicePageClick={handleServicePageClick} onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
+        <Header onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
         <Suspense fallback={<PageLoader />}>
           <TermsOfService onBack={handleBackToHome} />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
+        <Footer onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -325,11 +314,11 @@ function App() {
   if (currentPage === 'privacy') {
     return (
       <div className="min-h-screen">
-        <Header onServicePageClick={handleServicePageClick} onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
+        <Header onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
         <Suspense fallback={<PageLoader />}>
           <PrivacyPolicy onBack={handleBackToHome} />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
+        <Footer onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -337,15 +326,14 @@ function App() {
   if (currentPage === 'location' && selectedLocation) {
     return (
       <div className="min-h-screen">
-        <Header onServicePageClick={handleServicePageClick} onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
+        <Header onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
         <Suspense fallback={<PageLoader />}>
           <LocationQuote 
             location={selectedLocation}
             onBack={handleBackToHome}
-            onBookingComplete={handleBookingComplete}
           />
         </Suspense>
-        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
+        <Footer onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -353,13 +341,13 @@ function App() {
   if (currentPage === 'checkout' && bookingData) {
     return (
       <div className="min-h-screen">
-        <Header onServicePageClick={handleServicePageClick} onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
-        <BookingCheckout 
-          bookingData={bookingData}
-          onBack={handleBackToBooking}
-          onEditQuote={handleEditQuote}
-        />
-        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
+        <Header onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
+      {/* <BookingCheckout 
+        bookingData={bookingData}
+        onBack={handleBackToBooking}
+        onEditQuote={handleEditQuote}
+      /> */}
+        <Footer onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
@@ -367,26 +355,26 @@ function App() {
   if (currentPage === 'booking') {
     return (
       <div className="min-h-screen">
-        <Header onServicePageClick={handleServicePageClick} onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
-        <Booking 
-          selectedService={selectedService} 
-          onBack={handleBackToHome}
-          onBookingComplete={handleBookingComplete}
-        />
-        <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
+        <Header onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
+      {/* <Booking 
+        selectedService={selectedService} 
+        onBack={handleBackToHome}
+        onBookingComplete={handleBookingComplete}
+      /> */}
+        <Footer onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen">
-      <Header onServicePageClick={handleServicePageClick} onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
-      <Hero onBookingComplete={handleBookingComplete} />
-      <Services onServiceClick={handleServiceClick} onServicePageClick={handleServicePageClick} />
+      <Header onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
+      <Hero />
+      <Services onServiceClick={handleServiceClick} />
       <Portfolio />
       <About />
       <Contact />
-      <Footer onServicePageClick={handleServicePageClick} onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
+      <Footer onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       <FloatingBookingButton />
     </div>
   );

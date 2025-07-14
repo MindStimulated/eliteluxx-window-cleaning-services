@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Home, Building2, Sparkles, Shield, Clock, Star } from 'lucide-react';
+import { Home, Building2, Sparkles, Shield, Star } from 'lucide-react';
 
 interface ServicesProps {
   onServiceClick?: (serviceName: string) => void;
-  onServicePageClick?: (servicePage: 'residential-cleaning' | 'commercial-cleaning' | 'move-in-out-cleaning' | 'emergency-cleaning' | 'post-construction-cleaning' | 'luxury-maintenance' | 'short-term-rental-cleaning') => void;
+  onServicePageClick?: (servicePage: 'residential-windows' | 'commercial-windows' | 'solar-panel-cleaning' | 'pressure-washing' | 'screen-repair' | 'high-rise-windows' | 'emergency-service') => void;
 }
 
 const Services: React.FC<ServicesProps> = ({ onServiceClick, onServicePageClick }) => {
@@ -16,89 +16,82 @@ const Services: React.FC<ServicesProps> = ({ onServiceClick, onServicePageClick 
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
   const services = [
     {
       icon: Home,
-      title: 'Residential Cleaning',
-      description: 'Comprehensive deep cleaning for homes of all sizes, tailored to your lifestyle and preferences.',
-      features: ['Deep kitchen cleaning', 'Bathroom sanitization', 'Dusting & vacuuming', 'Window cleaning'],
-      price: 'From $135',
-      image: 'https://khwmoizeigmddolwtrtl.supabase.co/storage/v1/object/public/eliteluxx-cleaning/images/website/residential-home-cleaning.jpg', // Residential home cleaning
+      title: 'Residential Windows',
+      description: 'Professional window cleaning for homes of all sizes, including tracks, frames, and screens.',
+      features: ['Interior & exterior windows', 'Screen cleaning', 'Track cleaning', 'Frame detailing'],
+      price: 'From $125',
+      image: 'https://khwmoizeigmddolwtrtl.supabase.co/storage/v1/object/public/eliteluxx-window-cleaning/images/website/window-cleaning-service-coachella-valley.jpg',
     },
     {
       icon: Building2,
-      title: 'Commercial Cleaning',
-      description: 'Professional office and commercial space cleaning to maintain a pristine work environment.',
-      features: ['Office sanitization', 'Restroom maintenance', 'Common area cleaning', 'Floor care'],
+      title: 'Commercial Windows',
+      description: 'Comprehensive window cleaning solutions for offices, storefronts, and commercial buildings.',
+      features: ['Storefront windows', 'Multi-story buildings', 'Safety compliance', 'Regular maintenance plans'],
       price: 'Custom pricing',
-      image: 'https://khwmoizeigmddolwtrtl.supabase.co/storage/v1/object/public/eliteluxx-cleaning/images/website/corporate-office-cleaning.jpg', // Corporate office cleaning
+      image: 'https://khwmoizeigmddolwtrtl.supabase.co/storage/v1/object/public/eliteluxx-window-cleaning/images/website/window-cleaning-service-coachella-valley.jpg',
     },
     {
       icon: Sparkles,
-      title: 'Move-In/Move-Out',
-      description: 'Thorough cleaning for property transitions, ensuring spaces are pristine for new occupants.',
-      features: ['Full property deep clean', 'Appliance cleaning', 'Cabinet interior cleaning', 'Fixture polishing'],
-      price: 'From $250',
-      image: 'https://khwmoizeigmddolwtrtl.supabase.co/storage/v1/object/public/eliteluxx-cleaning/images/website/modern-palm-springs-home-cleaning.jpg', // Modern home cleaning
+      title: 'Solar Panel Cleaning',
+      description: 'Specialized cleaning to maintain the efficiency of your solar panels.',
+      features: ['Performance optimization', 'Gentle cleaning methods', 'Regular maintenance', 'Efficiency reports'],
+      price: 'From $150',
+      image: 'https://khwmoizeigmddolwtrtl.supabase.co/storage/v1/object/public/eliteluxx-window-cleaning/images/website/window-cleaning-service-coachella-valley.jpg',
     },
     {
       icon: Shield,
-      title: 'Post-Construction',
-      description: 'Specialized cleaning to remove construction dust and debris, revealing your new space.',
-      features: ['Debris removal', 'Surface restoration', 'Air purification', 'Safety inspection'],
-      price: 'From $300',
-      image: 'https://khwmoizeigmddolwtrtl.supabase.co/storage/v1/object/public/eliteluxx-cleaning/images/website/new-construction-home-cleaning-coachella-valley.jpg', // New construction cleaning
-    },
-    {
-      icon: Clock,
-      title: 'Emergency Cleaning',
-      description: '24/7 urgent cleaning services for unexpected situations and time-sensitive needs.',
-      features: ['Same-day service', '24/7 availability', 'Rapid response team', 'Premium equipment'],
+      title: 'Pressure Washing',
+      description: 'High-pressure cleaning for driveways, patios, and exterior surfaces.',
+      features: ['Driveway cleaning', 'Patio restoration', 'Siding cleaning', 'Roof cleaning'],
       price: 'From $200',
-      image: 'https://khwmoizeigmddolwtrtl.supabase.co/storage/v1/object/public/eliteluxx-cleaning/images/website/emergency-home-cleaning-wine-carpet.jpg', // Emergency cleaning
+      image: 'https://khwmoizeigmddolwtrtl.supabase.co/storage/v1/object/public/eliteluxx-window-cleaning/images/website/window-cleaning-service-coachella-valley.jpg',
     },
     {
       icon: Star,
-      title: 'Luxury Maintenance',
-      description: 'Ongoing premium maintenance services for high-end properties and discerning clients.',
-      features: ['Weekly service', 'Premium products', 'Dedicated team', 'Concierge support'],
-      price: 'From $400/month',
-      image: 'https://khwmoizeigmddolwtrtl.supabase.co/storage/v1/object/public/eliteluxx-cleaning/images/website/home-cleaning-fine-artwork.jpg', // Fine artwork/luxury cleaning
+      title: 'Screen Repair',
+      description: 'Professional window screen repair and replacement services.',
+      features: ['Screen replacement', 'Frame repair', 'Custom sizing', 'Pet-resistant options'],
+      price: 'From $45',
+      image: 'https://khwmoizeigmddolwtrtl.supabase.co/storage/v1/object/public/eliteluxx-window-cleaning/images/website/window-cleaning-service-coachella-valley.jpg',
     },
     {
-      icon: Home,
-      title: 'Short Term Rental',
-      description: 'Professional turnover cleaning for Airbnb, VRBO, and vacation rental properties.',
-      features: ['Guest turnover cleaning', 'Amenity restocking', 'Property inspection', '5-star standards'],
-      price: 'From $120',
-      image: 'https://khwmoizeigmddolwtrtl.supabase.co/storage/v1/object/public/eliteluxx-cleaning/images/website/modern-palm-springs-home-cleaning.jpg', // Modern home cleaning for rental
-    },
+      icon: Building2,
+      title: 'High-Rise Windows',
+      description: 'Specialized cleaning for high-rise buildings and hard-to-reach windows.',
+      features: ['Rope access', 'Safety certified', 'Insurance coverage', 'Emergency services'],
+      price: 'Custom pricing',
+      image: 'https://khwmoizeigmddolwtrtl.supabase.co/storage/v1/object/public/eliteluxx-window-cleaning/images/website/window-cleaning-service-coachella-valley.jpg',
+    }
   ];
 
   const handleServiceClick = (serviceName: string) => {
     // Route to dedicated service pages for main services
     if (onServicePageClick) {
       switch (serviceName) {
-        case 'Residential Cleaning':
-          onServicePageClick('residential-cleaning');
+        case 'Residential Windows':
+          onServicePageClick('residential-windows');
           return;
-        case 'Commercial Cleaning':
-          onServicePageClick('commercial-cleaning');
+        case 'Commercial Windows':
+          onServicePageClick('commercial-windows');
           return;
-        case 'Move-In/Move-Out':
-          onServicePageClick('move-in-out-cleaning');
+        case 'Solar Panel Cleaning':
+          onServicePageClick('solar-panel-cleaning');
           return;
-        case 'Emergency Cleaning':
-          onServicePageClick('emergency-cleaning');
+        case 'Pressure Washing':
+          onServicePageClick('pressure-washing');
           return;
-        case 'Post-Construction':
-          onServicePageClick('post-construction-cleaning');
+        case 'Screen Repair':
+          onServicePageClick('screen-repair');
           return;
-        case 'Luxury Maintenance':
-          onServicePageClick('luxury-maintenance');
+        case 'High-Rise Windows':
+          onServicePageClick('high-rise-windows');
           return;
-        case 'Short Term Rental':
-          onServicePageClick('short-term-rental-cleaning');
+        case 'Emergency Service':
+          onServicePageClick('emergency-service');
           return;
       }
     }
@@ -123,8 +116,8 @@ const Services: React.FC<ServicesProps> = ({ onServiceClick, onServicePageClick 
             Our Premium Services
           </h2>
           <p className="font-inter text-base md:text-lg text-white/80 max-w-3xl mx-auto px-4">
-            Discover our comprehensive range of luxury cleaning services, each designed to exceed expectations 
-            and deliver immaculate results for every space.
+            Discover our comprehensive range of luxury window cleaning services, each designed to exceed expectations 
+            and deliver crystal-clear results for your home or business.
           </p>
         </motion.div>
         {/*Service Grid*/}
@@ -180,7 +173,7 @@ const Services: React.FC<ServicesProps> = ({ onServiceClick, onServicePageClick 
                       e.stopPropagation();
                       handleServiceClick(service.title);
                     }}
-                    className="font-inter font-medium text-sm md:text-base text-champagne-gold hover:text-champagne-gold transition-colors duration-200"
+                    className="font-inter font-medium text-sm md:text-base text-champagne-gold hover:text-champagne-gold/80 transition-colors duration-200"
                   >
                     Learn More →
                   </button>

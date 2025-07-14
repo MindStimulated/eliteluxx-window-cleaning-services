@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Phone, Menu, X, ChevronDown } from 'lucide-react';
 
 interface HeaderProps {
-  onServicePageClick?: (servicePage: 'residential-cleaning' | 'commercial-cleaning' | 'move-in-out-cleaning' | 'emergency-cleaning' | 'post-construction-cleaning' | 'luxury-maintenance' | 'short-term-rental-cleaning') => void;
   onHomeClick?: () => void;
-  onNavigationClick?: (page: 'blog' | 'contact') => void;
+  onNavigationClick?: (page: 'blog' | 'contact' | 'services') => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onServicePageClick, onHomeClick, onNavigationClick }) => {
+const Header: React.FC<HeaderProps> = ({ onHomeClick, onNavigationClick }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLocationsOpen, setIsLocationsOpen] = useState(false);
@@ -46,35 +45,17 @@ const Header: React.FC<HeaderProps> = ({ onServicePageClick, onHomeClick, onNavi
     'Thermal'
   ];
 
-  const services = [
-    { name: 'Residential Cleaning', key: 'residential-cleaning' as const },
-    { name: 'Commercial Cleaning', key: 'commercial-cleaning' as const },
-    { name: 'Move-In/Move-Out', key: 'move-in-out-cleaning' as const },
-    { name: 'Emergency Cleaning', key: 'emergency-cleaning' as const },
-    { name: 'Post-Construction', key: 'post-construction-cleaning' as const },
-    { name: 'Luxury Maintenance', key: 'luxury-maintenance' as const },
-    { name: 'Short Term Rental', key: 'short-term-rental-cleaning' as const },
-  ];
-
   const handleLocationClick = (location: string) => {
     // Create a new page URL with the location parameter
     const locationSlug = location.toLowerCase().replace(/\s+/g, '-');
     window.location.href = `/location/${locationSlug}`;
   };
 
-  const handleServiceClick = (serviceKey: 'residential-cleaning' | 'commercial-cleaning' | 'move-in-out-cleaning' | 'emergency-cleaning' | 'post-construction-cleaning' | 'luxury-maintenance' | 'short-term-rental-cleaning') => {
-    if (onServicePageClick) {
-      onServicePageClick(serviceKey);
-    }
-    setIsServicesOpen(false);
-    setIsMobileMenuOpen(false);
-  };
-
   const handleNavClick = (item: { name: string; href: string; isPage: boolean }) => {
     if (item.isPage && onNavigationClick) {
-      // Handle page navigation for blog and contact
-      if (item.href === 'blog' || item.href === 'contact') {
-        onNavigationClick(item.href as 'blog' | 'contact');
+      // Handle page navigation for blog, contact, and services
+      if (item.href === 'blog' || item.href === 'contact' || item.href === 'services') {
+        onNavigationClick(item.href as 'blog' | 'contact' | 'services');
       }
     } else if (!item.isPage) {
       // Handle scroll to section for non-page links like About
@@ -87,6 +68,7 @@ const Header: React.FC<HeaderProps> = ({ onServicePageClick, onHomeClick, onNavi
   };
 
   const navItems = [
+    { name: 'Services', href: 'services', isPage: true },
     { name: 'About', href: '#about', isPage: false },
     { name: 'Contact Us', href: 'contact', isPage: true },
     { name: 'Blog', href: 'blog', isPage: true },
@@ -113,41 +95,16 @@ const Header: React.FC<HeaderProps> = ({ onServicePageClick, onHomeClick, onNavi
           >
             <img 
               src="https://khwmoizeigmddolwtrtl.supabase.co/storage/v1/object/public/eliteluxx-cleaning/images/website/eliteluxx-logo.PNG" 
-              alt="EliteLuxx Cleaning" 
+              alt="EliteLuxx Window Cleaning" 
               className="w-10 h-10 md:w-12 md:h-12 object-contain"
             />
             <span className={`font-lora font-semibold text-xl ${textColor} transition-colors duration-300`}>
-              EliteLuxx Cleaning
+              EliteLuxx Window Cleaning
             </span>
           </button>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            {/* Services Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => setIsServicesOpen(!isServicesOpen)}
-                className={`font-inter ${textColor} ${hoverColor} transition-colors duration-200 flex items-center space-x-1`}
-              >
-                <span>Services</span>
-                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isServicesOpen ? 'rotate-180' : ''}`} />
-              </button>
-              
-              {isServicesOpen && (
-                <div className="absolute top-full left-0 mt-2 w-56 header-glass rounded-lg shadow-elegant border border-white/20 py-2 z-50">
-                  {services.map((service) => (
-                    <button
-                      key={service.key}
-                      onClick={() => handleServiceClick(service.key)}
-                      className="w-full text-left px-4 py-2 text-sm font-inter text-deep-charcoal hover:text-champagne-gold hover:bg-champagne-gold/10 transition-colors duration-200"
-                    >
-                      {service.name}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
             {navItems.map((item) => (
               <button
                 key={item.name}
@@ -231,33 +188,18 @@ const Header: React.FC<HeaderProps> = ({ onServicePageClick, onHomeClick, onNavi
 
               {/* Mobile Menu Content */}
               <nav className="flex flex-col p-4 space-y-1">
-                {/* Services Dropdown */}
-                <div>
+                {navItems.map((item) => (
                   <button
-                    onClick={() => setIsServicesOpen(!isServicesOpen)}
-                    className="w-full text-left font-inter text-deep-charcoal hover:text-champagne-gold transition-colors duration-200 flex items-center justify-between py-3 border-b border-gray-100"
+                    key={item.name}
+                    onClick={() => {
+                      handleNavClick(item);
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="w-full text-left font-inter text-deep-charcoal hover:text-champagne-gold transition-colors duration-200 py-3 border-b border-gray-100"
                   >
-                    <span>Services</span>
-                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isServicesOpen ? 'rotate-180' : ''}`} />
+                    {item.name}
                   </button>
-                  
-                  {isServicesOpen && (
-                    <div className="ml-4 mt-2 space-y-2 pb-2">
-                      {services.map((service) => (
-                        <button
-                          key={service.key}
-                          onClick={() => {
-                            handleServiceClick(service.key);
-                            setIsMobileMenuOpen(false);
-                          }}
-                          className="block w-full text-left font-inter text-sm text-deep-charcoal/80 hover:text-champagne-gold transition-colors duration-200 py-2"
-                        >
-                          {service.name}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                ))}
 
                 {/* Locations Dropdown */}
                 <div>

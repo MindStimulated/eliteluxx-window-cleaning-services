@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Home, CheckCircle, Clock, Star, Users, Shield, ArrowLeft } from 'lucide-react';
+import { Building2, CheckCircle, Star, Users, Shield, ArrowLeft, Briefcase } from 'lucide-react';
 
-interface ResidentialCleaningProps {
+interface CommercialWindowsProps {
   onBack?: () => void;
   onBookingClick?: () => void;
 }
 
-const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBookingClick }) => {
+const CommercialWindows: React.FC<CommercialWindowsProps> = ({ onBack, onBookingClick }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -16,81 +16,99 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
-  const features = [
-    'Interior & exterior window cleaning',
-    'Screen cleaning & maintenance',
-    'Window track deep cleaning',
-    'Frame detailing & polishing',
-    'Sill cleaning & sanitization',
-    'Glass protection treatment',
-    'Hard water stain removal',
-    'Streak-free finish guaranteed'
+  
+  const services = [
+    'Storefront window cleaning',
+    'Multi-story building windows',
+    'Office building exteriors',
+    'Safety compliance protocols',
+    'Regular maintenance plans',
+    'Emergency glass cleaning',
+    'Post-construction cleanup',
+    'Pressure washing services'
+  ];
+
+  const industries = [
+    {
+      name: 'Office Buildings',
+      description: 'Professional window cleaning for corporate headquarters and office complexes.',
+      icon: Briefcase
+    },
+    {
+      name: 'Retail Storefronts',
+      description: 'Crystal-clear windows that showcase your business and attract customers.',
+      icon: Building2
+    },
+    {
+      name: 'Medical Facilities',
+      description: 'Specialized cleaning for hospitals, clinics, and healthcare facilities.',
+      icon: Shield
+    },
+    {
+      name: 'Educational Buildings',
+      description: 'Schools, universities, and educational facilities window maintenance.',
+      icon: Users
+    }
   ];
 
   const packages = [
     {
-      name: 'Basic Window Clean',
-      price: 'From $125',
-      duration: '2-3 hours',
-      ideal: 'Regular maintenance',
+      name: 'Basic Commercial',
+      price: 'Custom Quote',
+      frequency: 'Monthly or Quarterly',
+      ideal: 'Small businesses & retail',
       includes: [
         'Exterior window cleaning',
-        'Interior window cleaning',
-        'Basic frame wiping',
-        'Streak-free finish',
+        'Storefront glass',
+        'Entry door cleaning',
+        'Basic frame maintenance',
         'Quality inspection'
       ]
     },
     {
-      name: 'Complete Window Service',
-      price: 'From $185',
-      duration: '3-4 hours',
-      ideal: 'Comprehensive cleaning',
+      name: 'Professional Plus',
+      price: 'Custom Quote',
+      frequency: 'Bi-weekly or Monthly',
+      ideal: 'Office buildings (2-5 stories)',
       includes: [
-        'Everything in Basic Clean',
-        'Screen cleaning & repair',
-        'Track deep cleaning',
-        'Frame detailing',
-        'Sill cleaning',
-        'Hard water stain removal'
+        'Everything in Basic',
+        'Interior window cleaning',
+        'Track & sill cleaning',
+        'Screen maintenance',
+        'Emergency service priority'
       ]
     },
     {
-      name: 'Premium Window Care',
-      price: 'From $245',
-      duration: '4-5 hours',
-      ideal: 'Luxury homes',
+      name: 'Enterprise Elite',
+      price: 'Custom Quote',
+      frequency: 'Weekly service available',
+      ideal: 'High-rise & large facilities',
       includes: [
-        'Everything in Complete Service',
-        'Glass protection coating',
-        'UV protection treatment',
-        'Monthly maintenance plan',
-        'Emergency glass repair',
-        'Eco-friendly solutions'
+        'Everything in Professional',
+        'Rope access cleaning',
+        'Safety compliance protocols',
+        'Insurance coverage',
+        'Dedicated account manager'
       ]
     }
   ];
 
-  const process = [
+  const benefits = [
     {
-      step: '1',
-      title: 'Property Assessment',
-      description: 'We evaluate your windows and discuss your specific cleaning needs and schedule preferences.'
+      title: 'Professional Image',
+      description: 'Crystal-clear windows enhance your business appearance and attract more customers.'
     },
     {
-      step: '2',
-      title: 'Equipment Setup',
-      description: 'We arrive with professional-grade equipment and eco-friendly cleaning solutions.'
+      title: 'Cost Effective',
+      description: 'Regular window maintenance prevents costly replacements and extends window life.'
     },
     {
-      step: '3',
-      title: 'Window Cleaning',
-      description: 'Our certified technicians clean your windows inside and out using proven techniques.'
+      title: 'Safety Compliance',
+      description: 'Our certified technicians follow all safety protocols for commercial window cleaning.'
     },
     {
-      step: '4',
-      title: 'Final Inspection',
-      description: 'We conduct a thorough quality check to ensure streak-free, crystal-clear results.'
+      title: 'Flexible Scheduling',
+      description: 'We work around your business hours to minimize disruption to operations.'
     }
   ];
 
@@ -118,24 +136,24 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
         >
           <div className="flex justify-center mb-6">
             <div className="w-16 h-16 bg-champagne-gold/10 rounded-full flex items-center justify-center">
-              <Home className="w-8 h-8 text-champagne-gold" />
+              <Building2 className="w-8 h-8 text-champagne-gold" />
             </div>
           </div>
           <h1 className="font-lora font-semibold text-3xl md:text-4xl lg:text-5xl text-champagne-gold mb-6">
-            Residential Window Cleaning
+            Commercial Window Cleaning
           </h1>
           <p className="font-inter text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
             <span className={isMobile ? 'block' : 'hidden'}>
-              Professional window cleaning for homes of all sizes.
+              Professional window cleaning for storefronts and commercial buildings.
             </span>
             <span className={isMobile ? 'hidden' : 'block'}>
-              Professional window cleaning for homes of all sizes, including tracks, frames, and screens. 
-              Our expert technicians deliver streak-free, crystal-clear results that enhance your home's natural light and curb appeal.
+              Comprehensive window cleaning solutions for offices, storefronts, and commercial buildings. 
+              From small businesses to large corporate facilities, we maintain crystal-clear windows that enhance your professional image.
             </span>
           </p>
         </motion.div>
 
-        {/* Features Grid - Hidden on mobile to reduce content above packages */}
+        {/* Industries We Serve - Hidden on mobile to reduce content above packages */}
         <motion.div
           initial={isMobile ? {} : { opacity: 0, y: 30 }}
           animate={isMobile ? {} : { opacity: 1, y: 0 }}
@@ -143,19 +161,20 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
           className={`mb-16 ${isMobile ? 'hidden' : 'block'}`}
         >
           <h2 className="font-lora font-semibold text-2xl md:text-3xl text-champagne-gold text-center mb-12">
-            What's Included
+            Industries We Serve
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => (
+            {industries.map((industry, index) => (
               <motion.div
-                key={feature}
+                key={industry.name}
                 initial={isMobile ? {} : { opacity: 0, y: 20 }}
                 animate={isMobile ? {} : { opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
-                className="card-glass rounded-lg p-6 text-center"
+                className="card-glass rounded-lg p-6 text-center group hover:shadow-3d-hover transition-all duration-300"
               >
-                <CheckCircle className="w-8 h-8 text-emerald-green mx-auto mb-4" />
-                <p className="font-inter text-white/90 text-sm leading-relaxed">{feature}</p>
+                <industry.icon className="w-10 h-10 text-champagne-gold mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="font-lora font-medium text-lg text-champagne-gold mb-3">{industry.name}</h3>
+                <p className="font-inter text-white/90 text-sm leading-relaxed">{industry.description}</p>
               </motion.div>
             ))}
           </div>
@@ -169,7 +188,7 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
           className="mb-16"
         >
           <h2 className="font-lora font-semibold text-2xl md:text-3xl text-champagne-gold text-center mb-12">
-            Service Packages
+            Commercial Window Packages
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {packages.map((pkg, index) => (
@@ -191,7 +210,7 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
                 <div className="text-center mb-6">
                   <h3 className="font-lora font-semibold text-xl text-champagne-gold mb-2">{pkg.name}</h3>
                   <div className="font-lora font-bold text-3xl text-emerald-green mb-1">{pkg.price}</div>
-                  <p className="font-inter text-white/60 text-sm mb-2">{pkg.duration}</p>
+                  <p className="font-inter text-white/60 text-sm mb-2">{pkg.frequency}</p>
                   <p className="font-inter text-white/80 text-sm">Ideal for {pkg.ideal}</p>
                 </div>
 
@@ -208,14 +227,14 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
                   onClick={onBookingClick}
                   className="w-full btn-primary font-inter font-medium text-base"
                 >
-                  Book This Package
+                  Get Quote
                 </button>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
-        {/* Our Process - Hidden on mobile to reduce content above packages */}
+        {/* Services Offered - Hidden on mobile to reduce content above packages */}
         <motion.div
           initial={isMobile ? {} : { opacity: 0, y: 30 }}
           animate={isMobile ? {} : { opacity: 1, y: 0 }}
@@ -223,28 +242,25 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
           className={`mb-16 ${isMobile ? 'hidden' : 'block'}`}
         >
           <h2 className="font-lora font-semibold text-2xl md:text-3xl text-champagne-gold text-center mb-12">
-            Our Process
+            Our Commercial Services
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {process.map((step, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((service, index) => (
               <motion.div
-                key={step.step}
+                key={service}
                 initial={isMobile ? {} : { opacity: 0, y: 20 }}
                 animate={isMobile ? {} : { opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
-                className="text-center"
+                className="card-glass rounded-lg p-6 text-center"
               >
-                <div className="w-12 h-12 bg-champagne-gold rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="font-lora font-bold text-white">{step.step}</span>
-                </div>
-                <h3 className="font-lora font-medium text-lg text-champagne-gold mb-3">{step.title}</h3>
-                <p className="font-inter text-white/80 text-sm leading-relaxed">{step.description}</p>
+                <CheckCircle className="w-8 h-8 text-emerald-green mx-auto mb-4" />
+                <p className="font-inter text-white/90 text-sm leading-relaxed">{service}</p>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
-        {/* Why Choose Us */}
+        {/* Benefits */}
         <motion.div
           initial={isMobile ? {} : { opacity: 0, y: 30 }}
           animate={isMobile ? {} : { opacity: 1, y: 0 }}
@@ -253,30 +269,21 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
         >
           <div className="card-glass rounded-lg p-8 md:p-12">
             <h2 className="font-lora font-semibold text-2xl md:text-3xl text-champagne-gold text-center mb-8">
-              Why Choose EliteLuxx for Your Home?
+              Benefits of Professional Commercial Window Cleaning
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <Users className="w-12 h-12 text-champagne-gold mx-auto mb-4" />
-                <h3 className="font-lora font-medium text-lg text-champagne-gold mb-3">Trusted Professionals</h3>
-                <p className="font-inter text-white/90 text-sm leading-relaxed">
-                  All our cleaners are background-checked, insured, and trained to our exacting standards.
-                </p>
-              </div>
-              <div className="text-center">
-                <Shield className="w-12 h-12 text-champagne-gold mx-auto mb-4" />
-                <h3 className="font-lora font-medium text-lg text-champagne-gold mb-3">100% Satisfaction</h3>
-                <p className="font-inter text-white/90 text-sm leading-relaxed">
-                  We guarantee our work. If you're not completely satisfied, we'll make it right.
-                </p>
-              </div>
-              <div className="text-center">
-                <Clock className="w-12 h-12 text-champagne-gold mx-auto mb-4" />
-                <h3 className="font-lora font-medium text-lg text-champagne-gold mb-3">Flexible Scheduling</h3>
-                <p className="font-inter text-white/90 text-sm leading-relaxed">
-                  Weekly, bi-weekly, monthly, or one-time cleaning - we work around your schedule.
-                </p>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {benefits.map((benefit, index) => (
+                <motion.div
+                  key={benefit.title}
+                  initial={isMobile ? {} : { opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                  animate={isMobile ? {} : { opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 * index }}
+                  className="text-left"
+                >
+                  <h3 className="font-lora font-medium text-lg text-champagne-gold mb-3">{benefit.title}</h3>
+                  <p className="font-inter text-white/90 leading-relaxed">{benefit.description}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
         </motion.div>
@@ -291,21 +298,20 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
           <div className="card-glass rounded-lg p-8 md:p-12">
             <Star className="w-16 h-16 text-champagne-gold mx-auto mb-6" />
             <h2 className="font-lora font-semibold text-2xl md:text-3xl text-champagne-gold mb-4">
-              Ready for Crystal Clear Windows?
+              Ready to Enhance Your Business Image?
             </h2>
             <p className="font-inter text-white/80 mb-8 max-w-2xl mx-auto">
-              Experience the difference professional window cleaning makes. Book your service today and 
-              discover why homeowners across the Coachella Valley trust EliteLuxx Window Cleaning.
+              Contact us today for a custom commercial window cleaning solution tailored to your business needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
                 onClick={onBookingClick}
                 className="btn-primary font-inter font-medium text-lg px-8 py-4"
               >
-                Book Now
+                Get Custom Quote
               </button>
               <button className="border-2 border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-white px-8 py-4 rounded-md font-inter font-medium text-lg transition-all duration-200">
-                Get Free Quote
+                Schedule Consultation
               </button>
             </div>
           </div>
@@ -315,4 +321,4 @@ const ResidentialCleaning: React.FC<ResidentialCleaningProps> = ({ onBack, onBoo
   );
 };
 
-export default ResidentialCleaning;
+export default CommercialWindows;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Sparkles, Phone, Mail, MapPin, Facebook, Instagram, Twitter } from 'lucide-react';
 
 interface FooterProps {
-  onServicePageClick?: (servicePage: 'residential-cleaning' | 'commercial-cleaning' | 'move-in-out-cleaning' | 'emergency-cleaning' | 'post-construction-cleaning' | 'luxury-maintenance' | 'short-term-rental-cleaning') => void;
+  onServicePageClick?: (servicePage: 'residential-windows' | 'commercial-windows' | 'solar-panel-cleaning' | 'pressure-washing' | 'screen-repair' | 'high-rise-windows' | 'emergency-service') => void;
   onNavigationClick?: (page: 'blog' | 'contact') => void;
   onAboutClick?: () => void;
 }
@@ -29,7 +29,16 @@ const Footer: React.FC<FooterProps> = ({ onServicePageClick, onNavigationClick, 
 
   const handleServiceClick = (serviceKey: 'residential-cleaning' | 'commercial-cleaning' | 'move-in-out-cleaning' | 'emergency-cleaning' | 'post-construction-cleaning' | 'luxury-maintenance' | 'short-term-rental-cleaning') => {
     if (onServicePageClick) {
-      onServicePageClick(serviceKey);
+      const keyMap: Record<string, 'residential-windows' | 'commercial-windows' | 'solar-panel-cleaning' | 'pressure-washing' | 'screen-repair' | 'high-rise-windows' | 'emergency-service'> = {
+        'residential-cleaning': 'residential-windows',
+        'commercial-cleaning': 'commercial-windows',
+        'move-in-out-cleaning': 'solar-panel-cleaning',
+        'emergency-cleaning': 'pressure-washing',
+        'post-construction-cleaning': 'screen-repair',
+        'luxury-maintenance': 'high-rise-windows',
+        'short-term-rental-cleaning': 'emergency-service',
+      };
+      onServicePageClick(keyMap[serviceKey]);
     }
   };
 
@@ -54,7 +63,7 @@ const Footer: React.FC<FooterProps> = ({ onServicePageClick, onNavigationClick, 
           <div>
             <div className="flex items-center space-x-2 mb-6">
               <Sparkles className="w-8 h-8 text-champagne-gold" />
-              <span className="font-lora font-semibold text-xl">EliteLuxx Cleaning</span>
+              <span className="font-lora font-semibold text-xl">EliteLuxx Window Cleaning</span>
             </div>
             <p className="font-inter text-white/80 leading-relaxed mb-6">
               Premium luxury cleaning services that exceed expectations. Your space deserves nothing less than perfection.
@@ -179,7 +188,7 @@ const Footer: React.FC<FooterProps> = ({ onServicePageClick, onNavigationClick, 
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="font-inter text-sm text-white/60">
-            © {currentYear} EliteLuxx Cleaning. All rights reserved.
+            © {currentYear} EliteLuxx Window Cleaning. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <a href="/privacy" className="font-inter text-sm text-white/60 hover:text-champagne-gold transition-colors duration-200">

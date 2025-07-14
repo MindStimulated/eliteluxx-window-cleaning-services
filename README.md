@@ -1,15 +1,15 @@
-# EliteLuxx Cleaning Services
+# EliteLuxx Window Cleaning Services
 
-A luxury cleaning service website built with React, TypeScript, and Vite. Features a modern design with glassmorphism effects, performance optimizations, and a comprehensive service booking system.
+A luxury window cleaning service website built with React, TypeScript, and Vite. Features a modern design with glassmorphism effects, performance optimizations, and a comprehensive service booking system.
 
 ## 🌟 Features
 
 - **Modern Design**: Glassmorphism effects and champagne gold accents
 - **Performance Optimized**: 71% bundle size reduction with lazy loading
-- **Service Pages**: 7 specialized cleaning service pages
+- **Service Pages**: 6 specialized window cleaning service pages
 - **Booking System**: Interactive booking with real-time pricing
 - **Portfolio Showcase**: Image carousel with smooth animations
-- **Blog System**: SEO-optimized blog with 5 articles
+- **Blog System**: SEO-optimized blog with service articles
 - **Mobile Responsive**: Optimized for all device sizes
 - **Accessibility**: WCAG compliant with screen reader support
 
@@ -27,16 +27,16 @@ A luxury cleaning service website built with React, TypeScript, and Vite. Featur
 - **Animation**: Framer Motion
 - **Icons**: Lucide React
 - **Database**: Supabase
-- **Deployment**: GitHub Pages
+- **Deployment**: Custom hosting
 
 ## 📦 Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/eliteluxx-cleaning-services.git
+git clone https://github.com/yourusername/eliteluxx-window-cleaning-services.git
 
 # Navigate to project directory
-cd eliteluxx-cleaning-services
+cd eliteluxx-window-cleaning-services
 
 # Install dependencies
 npm install
@@ -92,13 +92,13 @@ docs/                  # Documentation
 
 ## 🎨 Services Offered
 
-1. **Residential Cleaning** - Home cleaning services
-2. **Commercial Cleaning** - Office and business cleaning
-3. **Move-in/Move-out** - Transition cleaning services
-4. **Emergency Cleaning** - Urgent cleaning needs
-5. **Post-Construction** - Construction cleanup
-6. **Luxury Maintenance** - High-end property care
-7. **Short Term Rental** - Airbnb/VRBO turnover cleaning
+1. **Residential Window Cleaning** - Home window cleaning services
+2. **Commercial Window Cleaning** - Office and business window cleaning
+3. **Move-in/Move-out Window Cleaning** - Transition window cleaning services
+4. **Emergency Window Cleaning** - Urgent window cleaning needs
+5. **Post-Construction Window Cleaning** - Construction cleanup
+6. **Luxury Window Maintenance** - High-end property care
+7. **Short Term Rental Window Cleaning** - Airbnb/VRBO turnover cleaning
 
 ## 📱 Key Features
 
@@ -124,7 +124,7 @@ docs/                  # Documentation
 
 The site is automatically deployed to GitHub Pages via GitHub Actions when pushing to the main branch.
 
-**Live Site**: `https://yourusername.github.io/eliteluxx-cleaning-services/`
+**Live Site**: `https://yourusername.github.io/eliteluxx-window-cleaning-services/`
 
 ### Manual Deployment
 
@@ -202,7 +202,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For support or questions about this project, please contact:
 - Email: support@eliteluxcleaning.com
-- Website: https://yourusername.github.io/eliteluxx-cleaning-services/
+- Website: https://yourusername.github.io/eliteluxx-window-cleaning-services/
 
 ## 🙏 Acknowledgments
 
@@ -213,4 +213,4 @@ For support or questions about this project, please contact:
 
 ---
 
-Built with ❤️ for EliteLuxx Cleaning Services
+Built with ❤️ for EliteLuxx Window Cleaning Services

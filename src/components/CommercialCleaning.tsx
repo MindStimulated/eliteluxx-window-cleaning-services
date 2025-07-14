@@ -17,77 +17,77 @@ const CommercialCleaning: React.FC<CommercialCleaningProps> = ({ onBack, onBooki
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
   const services = [
-    'Office spaces & cubicles',
-    'Reception & waiting areas',
-    'Conference & meeting rooms',
-    'Restroom sanitization',
-    'Kitchen & break room cleaning',
-    'Floor care & maintenance',
-    'Window cleaning (interior)',
-    'Trash removal & recycling'
+    'Storefront window cleaning',
+    'Multi-story building windows',
+    'Office building exteriors',
+    'Safety compliance protocols',
+    'Regular maintenance plans',
+    'Emergency glass cleaning',
+    'Post-construction cleanup',
+    'Pressure washing services'
   ];
 
   const industries = [
     {
-      name: 'Corporate Offices',
-      description: 'Professional office environments requiring consistent, high-quality cleaning.',
+      name: 'Office Buildings',
+      description: 'Professional window cleaning for corporate headquarters and office complexes.',
       icon: Briefcase
     },
     {
-      name: 'Medical Facilities',
-      description: 'Specialized sanitization for clinics, dental offices, and medical practices.',
-      icon: Shield
-    },
-    {
-      name: 'Retail Spaces',
-      description: 'Customer-facing environments that need to maintain pristine appearance.',
+      name: 'Retail Storefronts',
+      description: 'Crystal-clear windows that showcase your business and attract customers.',
       icon: Building2
     },
     {
-      name: 'Educational Facilities',
-      description: 'Schools, training centers, and educational institutions.',
+      name: 'Medical Facilities',
+      description: 'Specialized cleaning for hospitals, clinics, and healthcare facilities.',
+      icon: Shield
+    },
+    {
+      name: 'Educational Buildings',
+      description: 'Schools, universities, and educational facilities window maintenance.',
       icon: Users
     }
   ];
 
   const packages = [
     {
-      name: 'Basic Office',
+      name: 'Basic Commercial',
       price: 'Custom Quote',
-      frequency: 'Weekly/Bi-weekly',
-      ideal: 'Small offices (up to 2,000 sq ft)',
+      frequency: 'Monthly or Quarterly',
+      ideal: 'Small businesses & retail',
       includes: [
-        'Desk & surface cleaning',
-        'Restroom maintenance',
-        'Common area cleaning',
-        'Trash removal',
-        'Vacuuming & mopping'
+        'Exterior window cleaning',
+        'Storefront glass',
+        'Entry door cleaning',
+        'Basic frame maintenance',
+        'Quality inspection'
       ]
     },
     {
       name: 'Professional Plus',
       price: 'Custom Quote',
-      frequency: 'Multiple per week',
-      ideal: 'Medium offices (2,000-5,000 sq ft)',
+      frequency: 'Bi-weekly or Monthly',
+      ideal: 'Office buildings (2-5 stories)',
       includes: [
         'Everything in Basic',
-        'Kitchen deep cleaning',
-        'Conference room setup',
-        'Window cleaning',
-        'Supply restocking'
+        'Interior window cleaning',
+        'Track & sill cleaning',
+        'Screen maintenance',
+        'Emergency service priority'
       ]
     },
     {
       name: 'Enterprise Elite',
       price: 'Custom Quote',
-      frequency: 'Daily service available',
-      ideal: 'Large facilities (5,000+ sq ft)',
+      frequency: 'Weekly service available',
+      ideal: 'High-rise & large facilities',
       includes: [
         'Everything in Professional',
-        'Specialized equipment cleaning',
-        'Day porter services',
-        'Emergency response',
-        'Custom protocols'
+        'Rope access cleaning',
+        'Safety compliance protocols',
+        'Insurance coverage',
+        'Dedicated account manager'
       ]
     }
   ];
@@ -139,15 +139,15 @@ const CommercialCleaning: React.FC<CommercialCleaningProps> = ({ onBack, onBooki
             </div>
           </div>
           <h1 className="font-lora font-semibold text-3xl md:text-4xl lg:text-5xl text-champagne-gold mb-6">
-            Commercial Cleaning Services
+            Commercial Window Cleaning
           </h1>
           <p className="font-inter text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
             <span className={isMobile ? 'block' : 'hidden'}>
-              Professional commercial cleaning for healthy work environments.
+              Professional window cleaning for storefronts and commercial buildings.
             </span>
             <span className={isMobile ? 'hidden' : 'block'}>
-              Create a professional, healthy work environment with our comprehensive commercial cleaning services. 
-              From small offices to large corporate facilities, we maintain the highest standards of cleanliness and professionalism.
+              Comprehensive window cleaning solutions for offices, storefronts, and commercial buildings. 
+              From small businesses to large corporate facilities, we maintain crystal-clear windows that enhance your professional image.
             </span>
           </p>
         </motion.div>

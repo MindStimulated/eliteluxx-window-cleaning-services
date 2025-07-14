@@ -2,8 +2,6 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
-import Portfolio from './components/Portfolio';
-import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import FloatingBookingButton from './components/FloatingBookingButton';
@@ -19,6 +17,8 @@ const EmergencyService = lazy(() => import('./components/EmergencyWindowService'
 
 // Lazy load less frequently used pages
 const ServicesPage = lazy(() => import('./components/ServicesPage'));
+const AboutUsPage = lazy(() => import('./components/AboutUsPage'));
+const PortfolioPage = lazy(() => import('./components/PortfolioPage'));
 const TermsOfService = lazy(() => import('./components/TermsOfService'));
 const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
 const LocationQuote = lazy(() => import('./components/LocationQuote'));
@@ -46,7 +46,7 @@ interface BookingData {
 }
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'services' | 'booking' | 'checkout' | 'terms' | 'privacy' | 'location' | 'blog' | 'blog-post' | 'contact' | 'residential-windows' | 'commercial-windows' | 'solar-panel-cleaning' | 'pressure-washing' | 'screen-repair' | 'high-rise-windows' | 'emergency-service'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'services' | 'about' | 'portfolio' | 'booking' | 'checkout' | 'terms' | 'privacy' | 'location' | 'blog' | 'blog-post' | 'contact' | 'residential-windows' | 'commercial-windows' | 'solar-panel-cleaning' | 'pressure-washing' | 'screen-repair' | 'high-rise-windows' | 'emergency-service'>('home');
   const [bookingData, setBookingData] = useState<BookingData | null>(null);
   const [selectedLocation, setSelectedLocation] = useState<string>('');
   const [selectedBlogPost, setSelectedBlogPost] = useState<string>('');
@@ -81,20 +81,7 @@ function App() {
   };
 
   const handleAboutClick = () => {
-    // Scroll to About section on home page
-    const aboutElement = document.querySelector('#about');
-    if (aboutElement) {
-      aboutElement.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      // If not on home page, navigate to home first then scroll
-      setCurrentPage('home');
-      setTimeout(() => {
-        const element = document.querySelector('#about');
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    }
+    setCurrentPage('about');
   };
 
   // Auto-scroll to top when switching pages
@@ -133,6 +120,18 @@ function App() {
               setCurrentPage('home');
             }}
           />
+        </Suspense>
+        <Footer onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
+      </div>
+    );
+  }
+
+  if (currentPage === 'about') {
+    return (
+      <div className="min-h-screen">
+        <Header onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
+        <Suspense fallback={<PageLoader />}>
+          <AboutUsPage onBack={handleBackToHome} />
         </Suspense>
         <Footer onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       </div>
@@ -371,8 +370,6 @@ function App() {
       <Header onHomeClick={handleBackToHome} onNavigationClick={handleNavigationClick} />
       <Hero />
       <Services onServiceClick={handleServiceClick} />
-      <Portfolio />
-      <About />
       <Contact />
       <Footer onNavigationClick={handleNavigationClick} onAboutClick={handleAboutClick} />
       <FloatingBookingButton />
